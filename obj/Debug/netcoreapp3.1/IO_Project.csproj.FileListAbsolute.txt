@@ -1,0 +1,14 @@
+C:\Users\adamj\source\repos\IO_Project\bin\Debug\netcoreapp3.1\IO_Project.exe
+C:\Users\adamj\source\repos\IO_Project\bin\Debug\netcoreapp3.1\IO_Project.deps.json
+C:\Users\adamj\source\repos\IO_Project\bin\Debug\netcoreapp3.1\IO_Project.runtimeconfig.json
+C:\Users\adamj\source\repos\IO_Project\bin\Debug\netcoreapp3.1\IO_Project.runtimeconfig.dev.json
+C:\Users\adamj\source\repos\IO_Project\bin\Debug\netcoreapp3.1\IO_Project.dll
+C:\Users\adamj\source\repos\IO_Project\bin\Debug\netcoreapp3.1\IO_Project.pdb
+C:\Users\adamj\source\repos\IO_Project\obj\Debug\netcoreapp3.1\IO_Project.Form1.resources
+C:\Users\adamj\source\repos\IO_Project\obj\Debug\netcoreapp3.1\IO_Project.csproj.GenerateResource.cache
+C:\Users\adamj\source\repos\IO_Project\obj\Debug\netcoreapp3.1\IO_Project.AssemblyInfoInputs.cache
+C:\Users\adamj\source\repos\IO_Project\obj\Debug\netcoreapp3.1\IO_Project.AssemblyInfo.cs
+C:\Users\adamj\source\repos\IO_Project\obj\Debug\netcoreapp3.1\IO_Project.csproj.CoreCompileInputs.cache
+C:\Users\adamj\source\repos\IO_Project\obj\Debug\netcoreapp3.1\IO_Project.dll
+C:\Users\adamj\source\repos\IO_Project\obj\Debug\netcoreapp3.1\IO_Project.pdb
+C:\Users\adamj\source\repos\IO_Project\obj\Debug\netcoreapp3.1\IO_Project.genruntimeconfig.cache
