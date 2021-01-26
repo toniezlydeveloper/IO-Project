@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using IO_Project.IO;
 using IO_Project.IO.Payloads;
 using IO_Project.IO.Responses;
@@ -7,15 +9,17 @@ using IO_Project.JourneyInteraction.Entities;
 
 namespace IO_Project.StageInteraction.Entities
 {
-    class StageAssigner : AOperator
+    class StageModifier : AOperator
     {
-        private IStageView stageView;
+        private IStageView modifiedView;
+        private IStageView modificationView;
         private IJourneyView journeyView;
         private IRequestSender requestSender;
 
-        public StageAssigner(IStageView stageView, IJourneyView journeyView)
+        public StageModifier(IStageView modificationView, IStageView modifiedView, IJourneyView journeyView)
         {
-            this.stageView = stageView;
+            this.modificationView = modificationView;
+            this.modifiedView = modifiedView;
             this.journeyView = journeyView;
         }
 
@@ -31,7 +35,7 @@ namespace IO_Project.StageInteraction.Entities
 
         private bool IsViewValid()
         {
-            return new StageSetupValidator(stageView).IsViewValid();
+            return new StageSetupValidator(modificationView).IsViewValid();
         }
 
         private void RequestStageStatus()
@@ -44,9 +48,9 @@ namespace IO_Project.StageInteraction.Entities
             IsBusy = true;
         }
 
-        private void RequestStageAssignment()
+        private void RequestStageModification()
         {
-            Request request = new RequestBuilder().OfType(RequestType.AssignStage)
+            Request request = new RequestBuilder().OfType(RequestType.ModifyStage)
                 .WithPayload(StageAssignmentRequestPayload())
                 .WithCallback(FinalizeOperation)
                 .WithFailCallback(FinalizeFailedOperation).Build();
@@ -54,10 +58,10 @@ namespace IO_Project.StageInteraction.Entities
         }
 
         private StageAssignmentStatusPayload StageAssignmentStatusRequestPayload() =>
-            new StageAssignmentStatusPayload(stageView.Name, journeyView.Name);
+            new StageAssignmentStatusPayload(modificationView.Name, journeyView.Name);
 
-        private StageAssignmentPayload StageAssignmentRequestPayload() => new StageAssignmentPayload(journeyView.Name,
-            stageView.Name, stageView.Description, stageView.IconPath);
+        private StageModificationPayload StageAssignmentRequestPayload() => new StageModificationPayload(journeyView.Name,
+            modifiedView.Name, modificationView.Name, modificationView.Description, modificationView.IconPath);
 
         private void ProcessAssignmentStatus(object response)
         {
@@ -69,7 +73,7 @@ namespace IO_Project.StageInteraction.Entities
             }
             else
             {
-                RequestStageAssignment();
+                RequestStageModification();
             }
         }
     }

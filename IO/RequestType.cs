@@ -9,6 +9,7 @@ namespace IO_Project.IO
         JourneysExist,
         CreateJourney,
         AssignStage,
-        StageIsAssigned
+        StageIsAssigned,
+        ModifyStage
     }
 }
