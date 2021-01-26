@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using IO_Project.JourneyInteraction.Entities;
 
 namespace IO_Project.IO

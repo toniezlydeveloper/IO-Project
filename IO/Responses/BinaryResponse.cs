@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IO_Project.IO.Responses
+﻿namespace IO_Project.IO.Responses
 {
     class BinaryResponse
     {

@@ -19,18 +19,9 @@ namespace IO_Project.JourneyInteraction.Entities
 
         public override void TryPerformingOperation()
         {
-            if (!IsViewValid())
-            {
-                return;
-            }
-
             RequestJourneyStatus();
         }
 
-        private bool IsViewValid()
-        {
-            return new JourneySetupValidator(modificationView).IsViewValid();
-        }
         private void RequestJourneyStatus()
         {
             Request request = new RequestBuilder().OfType(RequestType.JourneysExist)
@@ -51,7 +42,7 @@ namespace IO_Project.JourneyInteraction.Entities
         }
 
         private JourneysExistPayload RequestStatusPayload() => new JourneysExistPayload(modificationView.Name);
-        
+
         private JourneyModificationPayload RequestModificationPayload() => new JourneyModificationPayload(modifiedView.Name,
             modificationView.Name, modificationView.Description, modificationView.Location, modificationView.Date);
 

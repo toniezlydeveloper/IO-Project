@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IO_Project.JourneyInteraction
+﻿namespace IO_Project.JourneyInteraction
 {
     interface IJourneyPresenter
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using IO_Project.StageInteraction;
 using IO_Project.ParticipantInteraction;
+using IO_Project.StageInteraction;
 
 namespace IO_Project.JourneyInteraction
 {

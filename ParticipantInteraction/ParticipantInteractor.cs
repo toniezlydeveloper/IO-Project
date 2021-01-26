@@ -1,6 +1,5 @@
 ﻿using System;
 using IO_Project.IO;
-using IO_Project.IO.Payloads;
 using IO_Project.JourneyInteraction;
 
 namespace IO_Project.ParticipantInteraction

@@ -1,5 +1,4 @@
-﻿using System;
-using IO_Project.IO;
+﻿using IO_Project.IO;
 using IO_Project.IO.Payloads;
 using IO_Project.IO.Responses;
 
@@ -18,17 +17,7 @@ namespace IO_Project.JourneyInteraction.Entities
 
         public override void TryPerformingOperation()
         {
-            if (!IsViewValid())
-            {
-                return;
-            }
-
             RequestJourneyStatus();
-        }
-
-        private bool IsViewValid()
-        {
-            return new JourneySetupValidator(creationView).IsViewValid();
         }
 
         private void RequestJourneyStatus()

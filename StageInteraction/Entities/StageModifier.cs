@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using IO_Project.IO;
+﻿using IO_Project.IO;
 using IO_Project.IO.Payloads;
 using IO_Project.IO.Responses;
 using IO_Project.JourneyInteraction;
@@ -25,17 +22,7 @@ namespace IO_Project.StageInteraction.Entities
 
         public override void TryPerformingOperation()
         {
-            if (!IsViewValid())
-            {
-                return;
-            }
-
             RequestStageStatus();
-        }
-
-        private bool IsViewValid()
-        {
-            return new StageSetupValidator(modificationView).IsViewValid();
         }
 
         private void RequestStageStatus()
