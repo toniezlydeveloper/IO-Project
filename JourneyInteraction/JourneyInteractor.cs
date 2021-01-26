@@ -1,56 +1,40 @@
 ﻿using System;
-using IO_Project.IO;
-using IO_Project.IO.Payloads;
+using IO_Project.JourneyInteraction.Entities;
 
 namespace IO_Project.JourneyInteraction
 {
-    class JourneyInteractor : IJourneyCreator
+    class JourneyInteractor : IJourneyCreator, IJourneyModifier
     {
-        private IJourneyView creationView;
-        private IRequestSender requestSender;
+        private IJourneyOperator journeyCreator;
+        private IJourneyOperator journeyModifier;
+
+        public JourneyInteractor(IJourneyOperator journeyCreator, IJourneyOperator journeyModifier)
+        {
+            this.journeyCreator = journeyCreator;
+            this.journeyModifier = journeyModifier;
+        }
 
         public void CreateJourney(Action creationCallback, Action creationFailCallback)
         {
-            if (!IsSetupValid())
+            TryPerformingOperation(journeyCreator, creationCallback, creationFailCallback);
+        }
+
+        public void ModifyJourney(Action modificationCallback, Action modificationFailCallback)
+        {
+            TryPerformingOperation(journeyModifier, modificationCallback, modificationFailCallback);
+        }
+
+        private void TryPerformingOperation(IJourneyOperator journeyOperator, Action operationCallback, Action operationFailCallback)
+        {
+            if (journeyOperator.IsBusy)
             {
-                return;
+                operationFailCallback?.Invoke();
             }
-
-            Request request = new RequestBuilder().OfType(RequestType.CreateJourney)
-                .WithPayload(GetPayload())
-                .WithCallback(creationCallback)
-                .WithFailCallback(creationFailCallback).Build();
-            requestSender.Send(request);
-        }
-
-        private CreateJourneyPayload GetPayload()
-        {
-            return new CreateJourneyPayload(creationView.Name, creationView.Description, creationView.Location, creationView.Date);
-        }
-
-        private bool IsSetupValid()
-        {
-            return IsNameValid() && IsDescriptionValid() && IsLocationValid() && IsDateValid();
-        }
-
-        private bool IsNameValid()
-        {
-            return !string.IsNullOrEmpty(creationView.Name);
-        }
-
-        private bool IsDescriptionValid()
-        {
-            return !string.IsNullOrEmpty(creationView.Description);
-        }
-
-        private bool IsLocationValid()
-        {
-            return !string.IsNullOrEmpty(creationView.Date);
-        }
-
-        private bool IsDateValid()
-        {
-            return !string.IsNullOrEmpty(creationView.Location);
+            else
+            {
+                journeyOperator.AssignOperationCallbacks(operationCallback, operationFailCallback);
+                journeyOperator.TryPerformingOperation();
+            }
         }
     }
 }

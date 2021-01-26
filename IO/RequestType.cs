@@ -6,7 +6,7 @@ namespace IO_Project.IO
 {
     enum RequestType
     {
-        CreateJourney,
-        AssignParticipant
+        JourneysExist,
+        CreateJourney
     }
 }

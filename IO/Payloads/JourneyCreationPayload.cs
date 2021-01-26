@@ -4,14 +4,14 @@ using System.Text;
 
 namespace IO_Project.IO.Payloads
 {
-    class CreateJourneyPayload
+    class JourneyCreationPayload
     {
         public string Name { get; }
         public string Description { get; }
         public string Location { get; }
         public string Date { get; }
 
-        public CreateJourneyPayload(string name, string description, string location, string date)
+        public JourneyCreationPayload(string name, string description, string location, string date)
         {
             Name = name;
             Description = description;
