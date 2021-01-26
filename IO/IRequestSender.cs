@@ -6,6 +6,6 @@ namespace IO_Project.IO
 {
     interface IRequestSender
     {
-        void SendRequest(Request request);
+        void Send(Request request);
     }
 }
