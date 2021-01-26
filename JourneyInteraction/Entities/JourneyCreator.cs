@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using IO_Project.IO;
 using IO_Project.IO.Payloads;
 using IO_Project.IO.Responses;
 
 namespace IO_Project.JourneyInteraction.Entities
 {
-    class JourneyCreator
+    class JourneyCreator : IJourneyOperator
     {
         private Action creationCallback;
         private Action creationFailCallback;
-        private IJourneyView journeyView;
+        private IJourneyView creationView;
         private IRequestSender requestSender;
 
         public bool IsBusy { get; private set; }
@@ -19,18 +17,28 @@ namespace IO_Project.JourneyInteraction.Entities
         public JourneyCreator(IRequestSender requestSender, IJourneyView journeyView)
         {
             this.requestSender = requestSender;
-            this.journeyView = journeyView;
+            this.creationView = journeyView;
         }
 
-        public void AssignCallbacks(Action creationCallback, Action creationFailCallback)
+        public void AssignOperationCallbacks(Action operationCallback, Action operationFailCalblack)
         {
-            this.creationCallback = creationCallback;
-            this.creationFailCallback = creationFailCallback;
+            creationCallback = operationCallback;
+            creationFailCallback = operationFailCalblack;
         }
 
-        public void TryCreatingJourney()
+        public void TryPerformingOperation()
         {
+            if (!IsViewValid())
+            {
+                return;
+            }
+
             RequestJourneyStatus();
+        }
+
+        private bool IsViewValid()
+        {
+            return new JourneySetupValidator(creationView).IsViewValid();
         }
 
         private void RequestJourneyStatus()
@@ -40,7 +48,9 @@ namespace IO_Project.JourneyInteraction.Entities
                 .WithCallback(ProcessJourneyStatus)
                 .WithFailCallback(FinalizeFailedCreationAttempt).Build();
             requestSender.Send(request);
+            IsBusy = true;
         }
+
         private void RequestJourneyCreation()
         {
             Request request = new RequestBuilder().OfType(RequestType.CreateJourney)
@@ -50,9 +60,10 @@ namespace IO_Project.JourneyInteraction.Entities
             requestSender.Send(request);
         }
 
-        private JourneysExistPayload RequestStatusPayload() => new JourneysExistPayload(journeyView.Name);
+        private JourneysExistPayload RequestStatusPayload() => new JourneysExistPayload(creationView.Name);
 
-        private JourneyCreationPayload RequestCreationPayload() => new JourneyCreationPayload(journeyView.Name, journeyView.Description, journeyView.Location, journeyView.Date);
+        private JourneyCreationPayload RequestCreationPayload() => new JourneyCreationPayload(creationView.Name,
+            creationView.Description, creationView.Location, creationView.Date);
 
         private void ProcessJourneyStatus(object response)
         {

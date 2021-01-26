@@ -1,51 +1,40 @@
 ﻿using System;
-using IO_Project.IO;
-using IO_Project.IO.Payloads;
-using IO_Project.IO.Responses;
 using IO_Project.JourneyInteraction.Entities;
 
 namespace IO_Project.JourneyInteraction
 {
     class JourneyInteractor : IJourneyCreator, IJourneyModifier
     {
-        private IJourneyView creationView;
-        private IJourneyView modificationView;
-        private IRequestSender requestSender;
-        private JourneyCreator journeyCreator;
+        private IJourneyOperator journeyCreator;
+        private IJourneyOperator journeyModifier;
 
-        public JourneyInteractor(IJourneyView creationView, IJourneyView modificationView, IRequestSender requestSender)
+        public JourneyInteractor(IJourneyOperator journeyCreator, IJourneyOperator journeyModifier)
         {
-            this.creationView = creationView;
-            this.modificationView = modificationView;
-            this.requestSender = requestSender;
-            journeyCreator = new JourneyCreator(requestSender, creationView);
+            this.journeyCreator = journeyCreator;
+            this.journeyModifier = journeyModifier;
         }
 
         public void CreateJourney(Action creationCallback, Action creationFailCallback)
         {
-            if (CanAttemptJourneyCreation())
-            {
-                journeyCreator.AssignCallbacks(creationCallback, creationFailCallback);
-                journeyCreator.TryCreatingJourney();
-            }
-            else
-            {
-                creationFailCallback?.Invoke();
-            }
+            TryPerformingOperation(journeyCreator, creationCallback, creationFailCallback);
         }
 
         public void ModifyJourney(Action modificationCallback, Action modificationFailCallback)
         {
+            TryPerformingOperation(journeyModifier, modificationCallback, modificationFailCallback);
         }
 
-        private bool CanAttemptJourneyCreation()
+        private void TryPerformingOperation(IJourneyOperator journeyOperator, Action operationCallback, Action operationFailCallback)
         {
-            return !journeyCreator.IsBusy && IsViewValid(creationView);
-        }
-
-        private bool IsViewValid(IJourneyView view)
-        {
-            return new JourneySetupValidator(view).IsViewValid();
+            if (journeyOperator.IsBusy)
+            {
+                operationFailCallback?.Invoke();
+            }
+            else
+            {
+                journeyOperator.AssignOperationCallbacks(operationCallback, operationFailCallback);
+                journeyOperator.TryPerformingOperation();
+            }
         }
     }
 }
