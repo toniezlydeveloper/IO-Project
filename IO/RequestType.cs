@@ -5,7 +5,9 @@
         JourneysExist,
         CreateJourney,
         AssignStage,
-        StageIsAssigned,
-        ModifyStage
+        StageAssignmentStatus,
+        ModifyStage,
+        ParticipantAssignmentStatus,
+        AssignParticipant
     }
 }

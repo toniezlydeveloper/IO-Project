@@ -27,7 +27,7 @@ namespace IO_Project.StageInteraction.Entities
 
         private void RequestStageStatus()
         {
-            Request request = new RequestBuilder().OfType(RequestType.StageIsAssigned)
+            Request request = new RequestBuilder().OfType(RequestType.StageAssignmentStatus)
                 .WithPayload(StageAssignmentStatusRequestPayload())
                 .WithCallback(ProcessAssignmentStatus)
                 .WithFailCallback(FinalizeFailedOperation).Build();

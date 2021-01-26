@@ -1,30 +1,22 @@
 ﻿using System;
 using IO_Project.IO;
-using IO_Project.JourneyInteraction;
+using IO_Project.JourneyInteraction.Entities;
 
 namespace IO_Project.ParticipantInteraction
 {
-    class ParticipantInteractor : IParticipantCreator, IParticipantAssigner
+    class ParticipantInteractor : AInteractor, IParticipantCreator, IParticipantAssigner
     {
-        private IJourneyView journeyView;
-        private IRequestSender requestSender;
-        private IParticipantView participantView;
+        private AOperator participantCreator;
+        private AOperator participantAssigner;
 
         public void AssignParitcipant(Action assignCallback, Action assignFailCallback)
         {
-            if (!IsSetupValid())
-            {
-                return;
-            }
+            TryPerformingOperation(participantAssigner, assignCallback, assignFailCallback);
         }
 
         public void CreateParticipant(Action creationCallback, Action creationFailCallback)
         {
-        }
-
-        private bool IsSetupValid()
-        {
-            return true;
+            TryPerformingOperation(participantCreator, creationCallback, creationFailCallback);
         }
     }
 }

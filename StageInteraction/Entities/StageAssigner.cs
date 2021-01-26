@@ -25,12 +25,11 @@ namespace IO_Project.StageInteraction.Entities
 
         private void RequestStageStatus()
         {
-            Request request = new RequestBuilder().OfType(RequestType.StageIsAssigned)
+            Request request = new RequestBuilder().OfType(RequestType.StageAssignmentStatus)
                 .WithPayload(StageAssignmentStatusRequestPayload())
                 .WithCallback(ProcessAssignmentStatus)
                 .WithFailCallback(FinalizeFailedOperation).Build();
             requestSender.Send(request);
-            IsBusy = true;
         }
 
         private void RequestStageAssignment()
@@ -40,6 +39,7 @@ namespace IO_Project.StageInteraction.Entities
                 .WithCallback(FinalizeOperation)
                 .WithFailCallback(FinalizeFailedOperation).Build();
             requestSender.Send(request);
+            IsBusy = true;
         }
 
         private StageAssignmentStatusPayload StageAssignmentStatusRequestPayload() =>
