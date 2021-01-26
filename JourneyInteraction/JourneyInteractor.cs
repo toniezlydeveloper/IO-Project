@@ -1,56 +1,51 @@
 ﻿using System;
 using IO_Project.IO;
 using IO_Project.IO.Payloads;
+using IO_Project.IO.Responses;
+using IO_Project.JourneyInteraction.Entities;
 
 namespace IO_Project.JourneyInteraction
 {
-    class JourneyInteractor : IJourneyCreator
+    class JourneyInteractor : IJourneyCreator, IJourneyModifier
     {
         private IJourneyView creationView;
+        private IJourneyView modificationView;
         private IRequestSender requestSender;
+        private JourneyCreator journeyCreator;
+
+        public JourneyInteractor(IJourneyView creationView, IJourneyView modificationView, IRequestSender requestSender)
+        {
+            this.creationView = creationView;
+            this.modificationView = modificationView;
+            this.requestSender = requestSender;
+            journeyCreator = new JourneyCreator(requestSender, creationView);
+        }
 
         public void CreateJourney(Action creationCallback, Action creationFailCallback)
         {
-            if (!IsSetupValid())
+            if (CanAttemptJourneyCreation())
             {
-                return;
+                journeyCreator.AssignCallbacks(creationCallback, creationFailCallback);
+                journeyCreator.TryCreatingJourney();
             }
-
-            Request request = new RequestBuilder().OfType(RequestType.CreateJourney)
-                .WithPayload(GetPayload())
-                .WithCallback(creationCallback)
-                .WithFailCallback(creationFailCallback).Build();
-            requestSender.Send(request);
+            else
+            {
+                creationFailCallback?.Invoke();
+            }
         }
 
-        private CreateJourneyPayload GetPayload()
+        public void ModifyJourney(Action modificationCallback, Action modificationFailCallback)
         {
-            return new CreateJourneyPayload(creationView.Name, creationView.Description, creationView.Location, creationView.Date);
         }
 
-        private bool IsSetupValid()
+        private bool CanAttemptJourneyCreation()
         {
-            return IsNameValid() && IsDescriptionValid() && IsLocationValid() && IsDateValid();
+            return !journeyCreator.IsBusy && IsViewValid(creationView);
         }
 
-        private bool IsNameValid()
+        private bool IsViewValid(IJourneyView view)
         {
-            return !string.IsNullOrEmpty(creationView.Name);
-        }
-
-        private bool IsDescriptionValid()
-        {
-            return !string.IsNullOrEmpty(creationView.Description);
-        }
-
-        private bool IsLocationValid()
-        {
-            return !string.IsNullOrEmpty(creationView.Date);
-        }
-
-        private bool IsDateValid()
-        {
-            return !string.IsNullOrEmpty(creationView.Location);
+            return new JourneySetupValidator(view).IsViewValid();
         }
     }
 }

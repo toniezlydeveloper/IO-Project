@@ -23,7 +23,7 @@ namespace IO_Project.IO
             return this;
         }
 
-        public RequestBuilder WithCallback(Action callback)
+        public RequestBuilder WithCallback(Action<object> callback)
         {
             request.Callback = callback;
             return this;
