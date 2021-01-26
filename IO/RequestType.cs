@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace IO_Project
+namespace IO_Project.IO
 {
-    interface IDataSerializer
+    enum RequestType
     {
     }
 }
