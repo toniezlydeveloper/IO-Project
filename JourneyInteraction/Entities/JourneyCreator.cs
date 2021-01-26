@@ -5,14 +5,10 @@ using IO_Project.IO.Responses;
 
 namespace IO_Project.JourneyInteraction.Entities
 {
-    class JourneyCreator : IJourneyOperator
+    class JourneyCreator : AOperator
     {
-        private Action creationCallback;
-        private Action creationFailCallback;
         private IJourneyView creationView;
         private IRequestSender requestSender;
-
-        public bool IsBusy { get; private set; }
 
         public JourneyCreator(IRequestSender requestSender, IJourneyView journeyView)
         {
@@ -20,13 +16,7 @@ namespace IO_Project.JourneyInteraction.Entities
             this.creationView = journeyView;
         }
 
-        public void AssignOperationCallbacks(Action operationCallback, Action operationFailCalblack)
-        {
-            creationCallback = operationCallback;
-            creationFailCallback = operationFailCalblack;
-        }
-
-        public void TryPerformingOperation()
+        public override void TryPerformingOperation()
         {
             if (!IsViewValid())
             {
@@ -46,7 +36,7 @@ namespace IO_Project.JourneyInteraction.Entities
             Request request = new RequestBuilder().OfType(RequestType.JourneysExist)
                 .WithPayload(RequestStatusPayload())
                 .WithCallback(ProcessJourneyStatus)
-                .WithFailCallback(FinalizeFailedCreationAttempt).Build();
+                .WithFailCallback(FinalizeFailedOperation).Build();
             requestSender.Send(request);
             IsBusy = true;
         }
@@ -55,8 +45,8 @@ namespace IO_Project.JourneyInteraction.Entities
         {
             Request request = new RequestBuilder().OfType(RequestType.CreateJourney)
                 .WithPayload(RequestCreationPayload())
-                .WithCallback(FinalizeCreationAttempt)
-                .WithFailCallback(FinalizeFailedCreationAttempt).Build();
+                .WithCallback(FinalizeOperation)
+                .WithFailCallback(FinalizeFailedOperation).Build();
             requestSender.Send(request);
         }
 
@@ -71,24 +61,12 @@ namespace IO_Project.JourneyInteraction.Entities
 
             if (journeyExists)
             {
-                FinalizeFailedCreationAttempt();
+                FinalizeFailedOperation();
             }
             else
             {
                 RequestJourneyCreation();
             }
-        }
-
-        private void FinalizeCreationAttempt(object response)
-        {
-            creationCallback?.Invoke();
-            IsBusy = false;
-        }
-
-        private void FinalizeFailedCreationAttempt()
-        {
-            creationFailCallback?.Invoke();
-            IsBusy = false;
         }
     }
 }
