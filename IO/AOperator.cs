@@ -1,13 +1,22 @@
 ﻿using System;
+using IO_Project.IO;
 
 namespace IO_Project.JourneyInteraction.Entities
 {
     abstract class AOperator
     {
+        private IRequestSender requestSender;
         protected Action operationCallback;
         protected Action operationFailCallback;
 
-        public bool IsBusy { get; protected set; }
+        protected abstract RequestType HandledRequestType { get; }
+        protected abstract object Payload { get; }
+        public bool IsBusy { get; private set; }
+
+        public AOperator(IRequestSender requestSender)
+        {
+            this.requestSender = requestSender;
+        }
 
         public void AssignOperationCallbacks(Action operationCallback, Action operationFailCallback)
         {
@@ -15,15 +24,23 @@ namespace IO_Project.JourneyInteraction.Entities
             this.operationFailCallback = operationFailCallback;
         }
 
-        public abstract void TryPerformingOperation();
+        public void TryPerformingOperation()
+        {
+            Request request = new RequestBuilder().OfType(HandledRequestType)
+                .WithPayload(Payload)
+                .WithCallback(FinalizeOperation)
+                .WithFailCallback(FinalizeFailedOperation)
+                .Build();
+            requestSender.Send(request);
+        }
 
-        protected void FinalizeOperation(object response)
+        private void FinalizeOperation(object response)
         {
             operationCallback?.Invoke();
             IsBusy = false;
         }
 
-        protected void FinalizeFailedOperation()
+        private void FinalizeFailedOperation()
         {
             operationFailCallback?.Invoke();
             IsBusy = false;

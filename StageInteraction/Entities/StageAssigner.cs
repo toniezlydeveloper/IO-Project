@@ -9,30 +9,16 @@ namespace IO_Project.StageInteraction.Entities
     {
         private IStageView stageView;
         private IJourneyView journeyView;
-        private IRequestSender requestSender;
 
-        public StageAssigner(IStageView stageView, IJourneyView journeyView)
+        protected override RequestType HandledRequestType => RequestType.AssignStage;
+        protected override object Payload => new StageAssignmentPayload(journeyView.Name,
+            stageView.Name, stageView.Description, stageView.IconPath);
+
+        public StageAssigner(IStageView stageView, IJourneyView journeyView, IRequestSender requestSender)
+            : base (requestSender)
         {
             this.stageView = stageView;
             this.journeyView = journeyView;
         }
-
-        public override void TryPerformingOperation()
-        {
-            RequestStageAssignment();
-        }
-
-        private void RequestStageAssignment()
-        {
-            Request request = new RequestBuilder().OfType(RequestType.AssignStage)
-                .WithPayload(StageAssignmentRequestPayload())
-                .WithCallback(FinalizeOperation)
-                .WithFailCallback(FinalizeFailedOperation).Build();
-            requestSender.Send(request);
-            IsBusy = true;
-        }
-
-        private StageAssignmentPayload StageAssignmentRequestPayload() => new StageAssignmentPayload(journeyView.Name,
-            stageView.Name, stageView.Description, stageView.IconPath);
     }
 }

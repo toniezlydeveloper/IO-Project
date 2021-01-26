@@ -7,30 +7,15 @@ namespace IO_Project.JourneyInteraction.Entities
     class JourneyCreator : AOperator
     {
         private IJourneyView creationView;
-        private IRequestSender requestSender;
+
+        protected override RequestType HandledRequestType => RequestType.CreateJourney;
+        protected override object Payload => new JourneyCreationPayload(creationView.Name,
+            creationView.Description, creationView.Location, creationView.Date);
 
         public JourneyCreator(IRequestSender requestSender, IJourneyView journeyView)
+            : base(requestSender)
         {
-            this.requestSender = requestSender;
             this.creationView = journeyView;
         }
-
-        public override void TryPerformingOperation()
-        {
-            RequestJourneyCreation();
-        }
-
-        private void RequestJourneyCreation()
-        {
-            Request request = new RequestBuilder().OfType(RequestType.CreateJourney)
-                .WithPayload(CreationRequestPayload())
-                .WithCallback(FinalizeOperation)
-                .WithFailCallback(FinalizeFailedOperation).Build();
-            requestSender.Send(request);
-            IsBusy = true;
-        }
-
-        private JourneyCreationPayload CreationRequestPayload() => new JourneyCreationPayload(creationView.Name,
-            creationView.Description, creationView.Location, creationView.Date);
     }
 }

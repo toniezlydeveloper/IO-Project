@@ -6,31 +6,16 @@ namespace IO_Project.ParticipantInteraction.Entities
 {
     class ParticipantCreator : AOperator
     {
-        private IRequestSender requestSender;
         private IParticipantView participantView;
 
+        protected override RequestType HandledRequestType => RequestType.CreateParticipant;
+        protected override object Payload =>
+            new ParticipantCreationPayload(participantView.FullName);
+
         public ParticipantCreator(IParticipantView participantView, IRequestSender requestSender)
+            : base(requestSender)
         {
             this.participantView = participantView;
-            this.requestSender = requestSender;
         }
-
-        public override void TryPerformingOperation()
-        {
-            RequestParticipantCreation();
-        }
-
-        private void RequestParticipantCreation()
-        {
-            Request request = new RequestBuilder().OfType(RequestType.CreateParticipant)
-                .WithPayload(ParticipantAssignmentRequestPayload())
-                .WithCallback(FinalizeOperation)
-                .WithFailCallback(FinalizeFailedOperation).Build();
-            requestSender.Send(request);
-            IsBusy = true;
-        }
-
-        private ParticipantCreationPayload ParticipantAssignmentRequestPayload() => 
-            new ParticipantCreationPayload(participantView.FullName);
     }
 }
