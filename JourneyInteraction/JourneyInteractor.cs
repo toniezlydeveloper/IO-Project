@@ -1,5 +1,6 @@
 ﻿using System;
 using IO_Project.IO;
+using IO_Project.IO.Payloads;
 
 namespace IO_Project.JourneyInteraction
 {
@@ -15,23 +16,16 @@ namespace IO_Project.JourneyInteraction
                 return;
             }
 
-            Request request = new RequestBuilder().OfType(RequestType.JourneyWithNameExists)
-                .WithPayload(creationView.Name)
-                .WithCallback(response => ProcessResponse((bool)response, creationCallback, creationFailCallback))
+            Request request = new RequestBuilder().OfType(RequestType.CreateJourney)
+                .WithPayload(GetPayload())
+                .WithCallback(creationCallback)
                 .WithFailCallback(creationFailCallback).Build();
             requestSender.Send(request);
         }
 
-        private void ProcessResponse(bool journeyExists, Action creationCallback, Action creationFailCallback)
+        private CreateJourneyPayload GetPayload()
         {
-            if (journeyExists)
-            {
-                creationFailCallback?.Invoke();
-            }
-            else
-            {
-                creationCallback?.Invoke();
-            }
+            return new CreateJourneyPayload(creationView.Name, creationView.Description, creationView.Location, creationView.Date);
         }
 
         private bool IsSetupValid()
