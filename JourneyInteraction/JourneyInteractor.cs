@@ -1,14 +1,15 @@
 ﻿using System;
+using IO_Project.IO;
 using IO_Project.JourneyInteraction.Entities;
 
 namespace IO_Project.JourneyInteraction
 {
-    class JourneyInteractor : IJourneyCreator, IJourneyModifier
+    class JourneyInteractor : AInteractor, IJourneyCreator, IJourneyModifier
     {
-        private IJourneyOperator journeyCreator;
-        private IJourneyOperator journeyModifier;
+        private AOperator journeyCreator;
+        private AOperator journeyModifier;
 
-        public JourneyInteractor(IJourneyOperator journeyCreator, IJourneyOperator journeyModifier)
+        public JourneyInteractor(AOperator journeyCreator, AOperator journeyModifier)
         {
             this.journeyCreator = journeyCreator;
             this.journeyModifier = journeyModifier;
@@ -22,19 +23,6 @@ namespace IO_Project.JourneyInteraction
         public void ModifyJourney(Action modificationCallback, Action modificationFailCallback)
         {
             TryPerformingOperation(journeyModifier, modificationCallback, modificationFailCallback);
-        }
-
-        private void TryPerformingOperation(IJourneyOperator journeyOperator, Action operationCallback, Action operationFailCallback)
-        {
-            if (journeyOperator.IsBusy)
-            {
-                operationFailCallback?.Invoke();
-            }
-            else
-            {
-                journeyOperator.AssignOperationCallbacks(operationCallback, operationFailCallback);
-                journeyOperator.TryPerformingOperation();
-            }
         }
     }
 }
