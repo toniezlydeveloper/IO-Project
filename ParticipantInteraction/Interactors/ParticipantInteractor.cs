@@ -6,17 +6,19 @@ namespace IO_Project.ParticipantInteraction
 {
     class ParticipantInteractor : AInteractor, IParticipantCreator, IParticipantAssigner
     {
-        private AOperator participantCreator;
-        private AOperator participantAssigner;
+        public ParticipantInteractor(RequestOperator requestOperator)
+            : base(requestOperator)
+        {
+        }
 
         public void AssignParitcipant(Action assignCallback, Action assignFailCallback)
         {
-            TryPerformingOperation(participantAssigner, assignCallback, assignFailCallback);
+            TryInteracting(RequestType.AssignParticipant, assignCallback, assignFailCallback);
         }
 
         public void CreateParticipant(Action creationCallback, Action creationFailCallback)
         {
-            TryPerformingOperation(participantCreator, creationCallback, creationFailCallback);
+            TryInteracting(RequestType.CreateParticipant, creationCallback, creationFailCallback);
         }
     }
 }

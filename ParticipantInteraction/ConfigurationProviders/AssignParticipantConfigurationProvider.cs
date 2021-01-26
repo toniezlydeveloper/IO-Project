@@ -5,17 +5,16 @@ using IO_Project.JourneyInteraction.Entities;
 
 namespace IO_Project.ParticipantInteraction.Entities
 {
-    class ParticipantAssigner : AOperator
+    class AssignParticipantConfigurationProvider : IRequestConfigurationProvider
     {
         private IJourneyView journeyView;
         private IParticipantView participantView;
 
-        protected override RequestType HandledRequestType => RequestType.AssignParticipant;
-        protected override object Payload =>
+        public RequestType HandledRequestType => RequestType.AssignParticipant;
+        public object Payload =>
             new ParticipantAssignmentPayload(journeyView.Name, participantView.FullName);
 
-        public ParticipantAssigner(IJourneyView journeyView, IParticipantView participantView, IRequestSender requestSender)
-            : base(requestSender)
+        public AssignParticipantConfigurationProvider(IJourneyView journeyView, IParticipantView participantView)
         {
             this.journeyView = journeyView;
             this.participantView = participantView;

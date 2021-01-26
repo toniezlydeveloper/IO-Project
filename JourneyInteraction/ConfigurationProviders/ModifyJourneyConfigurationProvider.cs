@@ -3,17 +3,16 @@ using IO_Project.IO.Payloads;
 
 namespace IO_Project.JourneyInteraction.Entities
 {
-    class JourneyModifier : AOperator
+    class ModifyJourneyConfigurationProvider : IRequestConfigurationProvider
     {
         private IJourneyView modifiedView;
         private IJourneyView modificationView;
 
-        protected override RequestType HandledRequestType => RequestType.ModifyJourney;
-        protected override object Payload => new JourneyModificationPayload(modifiedView.Name,
+        public RequestType HandledRequestType => RequestType.ModifyJourney;
+        public object Payload => new JourneyModificationPayload(modifiedView.Name,
             modificationView.Name, modificationView.Description, modificationView.Location, modificationView.Date);
 
-        public JourneyModifier(IJourneyView modifiedView, IJourneyView modificationView, IRequestSender requestSender)
-            : base(requestSender)
+        public ModifyJourneyConfigurationProvider(IJourneyView modifiedView, IJourneyView modificationView)
         {
             this.modifiedView = modifiedView;
             this.modificationView = modificationView;

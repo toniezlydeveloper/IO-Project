@@ -5,18 +5,17 @@ using IO_Project.JourneyInteraction.Entities;
 
 namespace IO_Project.StageInteraction.Entities
 {
-    class StageModifier : AOperator
+    class ModifyStageConfigurationProvider : IRequestConfigurationProvider
     {
         private IStageView modifiedView;
         private IStageView modificationView;
         private IJourneyView journeyView;
 
-        protected override RequestType HandledRequestType => RequestType.ModifyStage;
-        protected override object Payload => new StageModificationPayload(journeyView.Name,
+        public RequestType HandledRequestType => RequestType.ModifyStage;
+        public object Payload => new StageModificationPayload(journeyView.Name,
             modifiedView.Name, modificationView.Name, modificationView.Description, modificationView.IconPath);
 
-        public StageModifier(IStageView modificationView, IStageView modifiedView, IJourneyView journeyView, IRequestSender requestSender)
-            : base(requestSender)
+        public ModifyStageConfigurationProvider(IStageView modificationView, IStageView modifiedView, IJourneyView journeyView)
         {
             this.modificationView = modificationView;
             this.modifiedView = modifiedView;

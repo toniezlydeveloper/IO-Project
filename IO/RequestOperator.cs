@@ -3,17 +3,16 @@ using IO_Project.IO;
 
 namespace IO_Project.JourneyInteraction.Entities
 {
-    abstract class AOperator
+    class RequestOperator
     {
         private IRequestSender requestSender;
+
         protected Action operationCallback;
         protected Action operationFailCallback;
 
-        protected abstract RequestType HandledRequestType { get; }
-        protected abstract object Payload { get; }
         public bool IsBusy { get; private set; }
 
-        public AOperator(IRequestSender requestSender)
+        public RequestOperator(IRequestSender requestSender)
         {
             this.requestSender = requestSender;
         }
@@ -24,17 +23,18 @@ namespace IO_Project.JourneyInteraction.Entities
             this.operationFailCallback = operationFailCallback;
         }
 
-        public void TryPerformingOperation()
+        public void PerformOperation(IRequestConfigurationProvider configurationProvider)
         {
-            Request request = new RequestBuilder().OfType(HandledRequestType)
-                .WithPayload(Payload)
+            Request request = new RequestBuilder().OfType(configurationProvider.HandledRequestType)
+                .WithPayload(configurationProvider.Payload)
                 .WithCallback(FinalizeOperation)
                 .WithFailCallback(FinalizeFailedOperation)
                 .Build();
             requestSender.Send(request);
+            IsBusy = true;
         }
 
-        private void FinalizeOperation(object response)
+        private void FinalizeOperation()
         {
             operationCallback?.Invoke();
             IsBusy = false;
