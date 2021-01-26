@@ -49,6 +49,7 @@ namespace IO_Project.JourneyInteraction.Entities
                 .WithFailCallback(FinalizeFailedOperation).Build();
             requestSender.Send(request);
         }
+
         private JourneysExistPayload RequestStatusPayload() => new JourneysExistPayload(modificationView.Name);
         
         private JourneyModificationPayload RequestModificationPayload() => new JourneyModificationPayload(modifiedView.Name,
