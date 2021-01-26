@@ -1,6 +1,5 @@
 ﻿using IO_Project.IO;
 using IO_Project.IO.Payloads;
-using IO_Project.IO.Responses;
 using IO_Project.JourneyInteraction;
 using IO_Project.JourneyInteraction.Entities;
 
@@ -22,17 +21,7 @@ namespace IO_Project.StageInteraction.Entities
 
         public override void TryPerformingOperation()
         {
-            RequestStageStatus();
-        }
-
-        private void RequestStageStatus()
-        {
-            Request request = new RequestBuilder().OfType(RequestType.StageAssignmentStatus)
-                .WithPayload(StageAssignmentStatusRequestPayload())
-                .WithCallback(ProcessAssignmentStatus)
-                .WithFailCallback(FinalizeFailedOperation).Build();
-            requestSender.Send(request);
-            IsBusy = true;
+            RequestStageModification();
         }
 
         private void RequestStageModification()
@@ -42,26 +31,10 @@ namespace IO_Project.StageInteraction.Entities
                 .WithCallback(FinalizeOperation)
                 .WithFailCallback(FinalizeFailedOperation).Build();
             requestSender.Send(request);
+            IsBusy = true;
         }
-
-        private StageAssignmentStatusPayload StageAssignmentStatusRequestPayload() =>
-            new StageAssignmentStatusPayload(modificationView.Name, journeyView.Name);
 
         private StageModificationPayload StageAssignmentRequestPayload() => new StageModificationPayload(journeyView.Name,
             modifiedView.Name, modificationView.Name, modificationView.Description, modificationView.IconPath);
-
-        private void ProcessAssignmentStatus(object response)
-        {
-            bool isAssigned = ((BinaryResponse)response).State;
-
-            if (isAssigned)
-            {
-                FinalizeFailedOperation();
-            }
-            else
-            {
-                RequestStageModification();
-            }
-        }
     }
 }

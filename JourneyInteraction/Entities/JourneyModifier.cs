@@ -1,6 +1,5 @@
 ﻿using IO_Project.IO;
 using IO_Project.IO.Payloads;
-using IO_Project.IO.Responses;
 
 namespace IO_Project.JourneyInteraction.Entities
 {
@@ -19,45 +18,20 @@ namespace IO_Project.JourneyInteraction.Entities
 
         public override void TryPerformingOperation()
         {
-            RequestJourneyStatus();
+            RequestJourneyModification();
         }
 
-        private void RequestJourneyStatus()
+        private void RequestJourneyModification()
         {
-            Request request = new RequestBuilder().OfType(RequestType.JourneysExist)
-                .WithPayload(RequestStatusPayload())
-                .WithCallback(ProcessJourneyStatus)
+            Request request = new RequestBuilder().OfType(RequestType.ModifyJourney)
+                .WithPayload(RequestModificationPayload())
+                .WithCallback(FinalizeOperation)
                 .WithFailCallback(FinalizeFailedOperation).Build();
             requestSender.Send(request);
             IsBusy = true;
         }
 
-        private void RequestJourneyModification()
-        {
-            Request request = new RequestBuilder().OfType(RequestType.CreateJourney)
-                .WithPayload(RequestModificationPayload())
-                .WithCallback(FinalizeOperation)
-                .WithFailCallback(FinalizeFailedOperation).Build();
-            requestSender.Send(request);
-        }
-
-        private JourneysExistPayload RequestStatusPayload() => new JourneysExistPayload(modificationView.Name);
-
         private JourneyModificationPayload RequestModificationPayload() => new JourneyModificationPayload(modifiedView.Name,
             modificationView.Name, modificationView.Description, modificationView.Location, modificationView.Date);
-
-        private void ProcessJourneyStatus(object response)
-        {
-            bool journeyExists = ((BinaryResponse)response).State;
-
-            if (journeyExists)
-            {
-                FinalizeFailedOperation();
-            }
-            else
-            {
-                RequestJourneyModification();
-            }
-        }
     }
 }

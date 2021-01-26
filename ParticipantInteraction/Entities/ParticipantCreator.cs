@@ -22,11 +22,12 @@ namespace IO_Project.ParticipantInteraction.Entities
 
         private void RequestParticipantCreation()
         {
-            Request request = new RequestBuilder().OfType(RequestType.AssignStage)
+            Request request = new RequestBuilder().OfType(RequestType.CreateParticipant)
                 .WithPayload(ParticipantAssignmentRequestPayload())
                 .WithCallback(FinalizeOperation)
                 .WithFailCallback(FinalizeFailedOperation).Build();
             requestSender.Send(request);
+            IsBusy = true;
         }
 
         private ParticipantCreationPayload ParticipantAssignmentRequestPayload() => 

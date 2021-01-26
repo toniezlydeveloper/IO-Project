@@ -2,12 +2,11 @@
 {
     enum RequestType
     {
-        JourneysExist,
         CreateJourney,
         AssignStage,
-        StageAssignmentStatus,
         ModifyStage,
-        ParticipantAssignmentStatus,
-        AssignParticipant
+        AssignParticipant,
+        CreateParticipant,
+        ModifyJourney
     }
 }

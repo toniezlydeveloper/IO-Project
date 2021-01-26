@@ -17,17 +17,7 @@ namespace IO_Project.JourneyInteraction.Entities
 
         public override void TryPerformingOperation()
         {
-            RequestJourneyStatus();
-        }
-
-        private void RequestJourneyStatus()
-        {
-            Request request = new RequestBuilder().OfType(RequestType.JourneysExist)
-                .WithPayload(StatusRequestPayload())
-                .WithCallback(ProcessJourneyStatus)
-                .WithFailCallback(FinalizeFailedOperation).Build();
-            requestSender.Send(request);
-            IsBusy = true;
+            RequestJourneyCreation();
         }
 
         private void RequestJourneyCreation()
@@ -37,25 +27,10 @@ namespace IO_Project.JourneyInteraction.Entities
                 .WithCallback(FinalizeOperation)
                 .WithFailCallback(FinalizeFailedOperation).Build();
             requestSender.Send(request);
+            IsBusy = true;
         }
-
-        private JourneysExistPayload StatusRequestPayload() => new JourneysExistPayload(creationView.Name);
 
         private JourneyCreationPayload CreationRequestPayload() => new JourneyCreationPayload(creationView.Name,
             creationView.Description, creationView.Location, creationView.Date);
-
-        private void ProcessJourneyStatus(object response)
-        {
-            bool journeyExists = ((BinaryResponse)response).State;
-
-            if (journeyExists)
-            {
-                FinalizeFailedOperation();
-            }
-            else
-            {
-                RequestJourneyCreation();
-            }
-        }
     }
 }
