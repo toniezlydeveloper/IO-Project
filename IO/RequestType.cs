@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IO_Project.IO
+﻿namespace IO_Project.IO
 {
     enum RequestType
     {
         CreateJourney,
-        AssignParticipant
+        AssignStage,
+        ModifyStage,
+        AssignParticipant,
+        CreateParticipant,
+        ModifyJourney
     }
 }

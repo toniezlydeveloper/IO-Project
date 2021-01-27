@@ -12,7 +12,6 @@ C:\Users\adamj\source\repos\IO_Project\obj\Debug\netcoreapp3.1\IO_Project.csproj
 C:\Users\adamj\source\repos\IO_Project\obj\Debug\netcoreapp3.1\IO_Project.dll
 C:\Users\adamj\source\repos\IO_Project\obj\Debug\netcoreapp3.1\IO_Project.pdb
 C:\Users\adamj\source\repos\IO_Project\obj\Debug\netcoreapp3.1\IO_Project.genruntimeconfig.cache
-D:\Projects\IO-Project\obj\Debug\netcoreapp3.1\IO_Project.csprojAssemblyReference.cache
 D:\Projects\IO-Project\obj\Debug\netcoreapp3.1\IO_Project.Form1.resources
 D:\Projects\IO-Project\obj\Debug\netcoreapp3.1\IO_Project.csproj.GenerateResource.cache
 D:\Projects\IO-Project\obj\Debug\netcoreapp3.1\IO_Project.AssemblyInfoInputs.cache
