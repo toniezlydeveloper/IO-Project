@@ -17,6 +17,7 @@ namespace IO_Project
 {
     static class Program
     {
+        private static SqlConnection connection;
         private static Journal journal;
         private static RequestInteractor requestInteractor;
         private static StageInteractor stageInteractor;
@@ -46,6 +47,8 @@ namespace IO_Project
 
         private static void InitializeDataOperators()
         {
+            connection =
+                new SqlConnection(@"Data Source=DESKTOP-B6D6O41;Initial Catalog=IO_proj1;Integrated Security=True;Pooling=False");
             dataSynchronizer = new DataSynchronizer();
             journal = new Journal();
         }
@@ -65,8 +68,6 @@ namespace IO_Project
 
         private static void CreateQueryExecutors()
         {
-            SqlConnection connection = 
-                new SqlConnection(@"Data Source=DESKTOP-B6D6O41;Initial Catalog=IO_proj1;Integrated Security=True;Pooling=False");
             RegisterQueryExecutor(new JourneyCreationQueryExecutor(connection));
             RegisterQueryExecutor(new JourneyModificationQueryExecutor(connection));
             RegisterQueryExecutor(new ParticipantAssignmentQueryExecutor(connection));
