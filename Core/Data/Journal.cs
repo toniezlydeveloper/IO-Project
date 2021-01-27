@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using IO_Project.JourneyInteraction;
 using IO_Project.ParticipantInteraction;
-using IO_Project.StageInteraction;
 
 namespace IO_Project.Core
 {
@@ -28,6 +26,11 @@ namespace IO_Project.Core
 
         public void AssignParticipantToJourney(Participant participant, Journey journey)
         {
+        }
+
+        internal object ParticipantByFullName(string participantFullName)
+        {
+            throw new NotImplementedException();
         }
     }
 }

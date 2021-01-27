@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using IO_Project.IO;
+﻿using IO_Project.IO;
 using IO_Project.IO.Payloads;
 using IO_Project.ParticipantInteraction;
 
@@ -13,9 +10,16 @@ namespace IO_Project.Core.JournalModifiers
 
         private Journal journal;
 
+        public ParticipantCreator(Journal journal)
+        {
+            this.journal = journal;
+        }
+
         public bool CanPerformModification(Request request)
         {
-            throw new NotImplementedException();
+            var payload = (ParticipantCreationPayload)request.Payload;
+            var participant = journal.ParticipantByFullName(payload.FullName);
+            return participant == default;
         }
 
         public void ModifyJournal(Request request)

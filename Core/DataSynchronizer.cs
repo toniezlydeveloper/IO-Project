@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using IO_Project.IO;
+﻿using IO_Project.IO;
 
 namespace IO_Project.Core
 {

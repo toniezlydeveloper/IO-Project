@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using IO_Project.IO;
+﻿using IO_Project.IO;
 using IO_Project.IO.Payloads;
 
 namespace IO_Project.Core.JournalModifiers
@@ -19,7 +16,9 @@ namespace IO_Project.Core.JournalModifiers
 
         public bool CanPerformModification(Request request)
         {
-            throw new NotImplementedException();
+            var payload = (JourneyModificationPayload)request.Payload;
+            var journey = journal.JourneyByName(payload.NewName);
+            return journey == default;
         }
 
         public void ModifyJournal(Request request)
