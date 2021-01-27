@@ -2,9 +2,14 @@
 {
     interface IJourneyView
     {
-        public string Name { get; }
-        public string Description { get; }
-        public string Location { get; }
-        public string Date { get; }
+        string Name { get;}
+        string Description { get;}
+      
+        string Date { get;}
+
+
     }
+
+
+    
 }

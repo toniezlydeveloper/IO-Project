@@ -1,4 +1,12 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace IO_Project
 {
@@ -9,5 +17,19 @@ namespace IO_Project
             InitializeComponent();
         }
 
+        private void AddJourney_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ModifyJourney_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TitleBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
