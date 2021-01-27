@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using IO_Project.ParticipantInteraction;
 using IO_Project.StageInteraction;
 
@@ -8,7 +8,7 @@ namespace IO_Project.JourneyInteraction
     class Journey
     {
         private List<Stage> stages { get; } = new List<Stage>();
-        private List<Participant> participantNames { get; } = new List<Participant>();
+        private List<Participant> participants { get; } = new List<Participant>();
 
         public string Name { get; set; }
         public string Description { get; set; }
@@ -22,14 +22,19 @@ namespace IO_Project.JourneyInteraction
             Date = date;
         }
 
-        public Stage StageByName(string oldName)
+        public Stage StageByName(string name)
         {
-            throw new NotImplementedException();
+            return stages.First(stage => stage.Name == name);
         }
 
         public void AddStage(Stage stage)
         {
-            throw new NotImplementedException();
+            stages.Add(stage);
+        }
+
+        public void AssignParticipant(Participant participant)
+        {
+            participants.Add(participant);
         }
     }
 }

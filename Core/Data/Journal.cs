@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using IO_Project.JourneyInteraction;
 using IO_Project.ParticipantInteraction;
 
@@ -8,6 +8,7 @@ namespace IO_Project.Core
     class Journal
     {
         private List<Journey> journeys = new List<Journey>();
+        private List<Participant> participants = new List<Participant>();
 
         public void AddJourney(Journey journey)
         {
@@ -16,21 +17,17 @@ namespace IO_Project.Core
 
         public Journey JourneyByName(string name)
         {
-            throw new NotImplementedException();
+            return journeys.First(journey => journey.Name == name);
         }
 
         public void AddParticipant(Participant participant)
         {
-            throw new NotImplementedException();
+            participants.Add(participant);
         }
 
-        public void AssignParticipantToJourney(Participant participant, Journey journey)
+        public Participant ParticipantByFullName(string fullName)
         {
-        }
-
-        internal object ParticipantByFullName(string participantFullName)
-        {
-            throw new NotImplementedException();
+            return participants.First(participant => participant.FullName == fullName);
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class Participant
     {
-        string FullName { get; }
+        public string FullName { get; }
 
         public Participant(string fullName)
         {

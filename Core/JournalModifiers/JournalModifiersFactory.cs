@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using IO_Project.IO;
 
 namespace IO_Project.Core
 {
     static class JournalModifiersFactory
     {
-        private static Dictionary<RequestType, IJournalModifier> modifiersByType = 
+        private static Dictionary<RequestType, IJournalModifier> modifiersByType =
             new Dictionary<RequestType, IJournalModifier>();
 
         public static void RegisterJournalModifier(IJournalModifier journalModifier)

@@ -28,7 +28,7 @@ namespace IO_Project.Core.JournalModifiers
             var payload = (ParticipantAssignmentPayload)request.Payload;
             var journey = journal.JourneyByName(payload.JourneyName);
             var participant = new Participant(payload.ParticipantFullName);
-            journal.AssignParticipantToJourney(participant, journey);
+            journey.AssignParticipant(participant);
         }
     }
 }
