@@ -1,16 +1,17 @@
 ﻿using System.Data;
+using System.Data.SqlClient;
 using IO_Project.Core.QueryExecutors;
 using IO_Project.IO.Payloads;
 
 namespace IO_Project.IO.Entities
 {
-    class JourneyQueryExecutor : IQueryExecutor
+    class JourneyCreationQueryExecutor : IQueryExecutor
     {
         private SqlConnection connection;
 
         public RequestType HandledRequestType => RequestType.CreateJourney;
 
-        public JourneyQueryExecutor(SqlConnection connection)
+        public JourneyCreationQueryExecutor(SqlConnection connection)
         {
             this.connection = connection;
         }
