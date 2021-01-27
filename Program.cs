@@ -49,8 +49,8 @@ namespace IO_Project
         {
             connection =
                 new SqlConnection(@"Data Source=DESKTOP-B6D6O41;Initial Catalog=IO_proj1;Integrated Security=True;Pooling=False");
+            journal = new DatabaseInteractor(connection).LoadJournal();
             dataSynchronizer = new DataSynchronizer();
-            journal = new Journal();
         }
 
         private static void CreateInteractors()
