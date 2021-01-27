@@ -1,20 +1,17 @@
-﻿using IO_Project.IO.Payloads;
-using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Text;
+using IO_Project.Core.QueryExecutors;
+using IO_Project.IO.Payloads;
 
 namespace IO_Project.IO.Entities
 {
-    class JourneyQueryExecutor : IQueryExecutor
+    class JourneyCreationQueryExecutor : IQueryExecutor
     {
         private SqlConnection connection;
 
         public RequestType HandledRequestType => RequestType.CreateJourney;
-        public Type HandlePayloadType => typeof(JourneyCreationPayload);
 
-        public JourneyQueryExecutor(SqlConnection connection)
+        public JourneyCreationQueryExecutor(SqlConnection connection)
         {
             this.connection = connection;
         }
@@ -48,8 +45,8 @@ namespace IO_Project.IO.Entities
             command.ExecuteNonQuery();
             connection.Close();
         }
-      
-            
+
+
     }
 }
 
