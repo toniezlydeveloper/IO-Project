@@ -6,8 +6,8 @@ namespace IO_Project.JourneyInteraction
 {
     class JourneyInteractor : AInteractor, IJourneyCreator, IJourneyModifier
     {
-        public JourneyInteractor(RequestOperator requestOperator)
-            : base(requestOperator)
+        public JourneyInteractor(RequestInteractor requestInteractor)
+            : base(requestInteractor)
         {
         }
 

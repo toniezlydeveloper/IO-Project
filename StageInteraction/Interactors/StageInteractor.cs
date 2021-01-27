@@ -6,8 +6,8 @@ namespace IO_Project.StageInteraction
 {
     class StageInteractor : AInteractor, IStageAssigner, IStageModifier
     {
-        public StageInteractor(RequestOperator requestOperator)
-            : base(requestOperator)
+        public StageInteractor(RequestInteractor requestInteractor)
+            : base(requestInteractor)
         {
         }
 

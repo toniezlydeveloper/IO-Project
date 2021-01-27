@@ -6,8 +6,8 @@ namespace IO_Project.ParticipantInteraction
 {
     class ParticipantInteractor : AInteractor, IParticipantCreator, IParticipantAssigner
     {
-        public ParticipantInteractor(RequestOperator requestOperator)
-            : base(requestOperator)
+        public ParticipantInteractor(RequestInteractor requestInteractor)
+            : base(requestInteractor)
         {
         }
 

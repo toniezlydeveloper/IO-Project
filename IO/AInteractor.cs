@@ -5,16 +5,16 @@ namespace IO_Project.IO
 {
     abstract class AInteractor
     {
-        private RequestOperator requestOperator;
+        private RequestInteractor requestInteractor;
 
-        public AInteractor(RequestOperator requestOperator)
+        public AInteractor(RequestInteractor requestInteractor)
         {
-            this.requestOperator = requestOperator;
+            this.requestInteractor = requestInteractor;
         }
 
         protected void TryInteracting(RequestType requestType, Action operationCallback, Action operationFailCallback)
         {
-            if (requestOperator.IsBusy)
+            if (requestInteractor.IsBusy)
             {
                 operationFailCallback?.Invoke();
             }
@@ -22,8 +22,8 @@ namespace IO_Project.IO
             {
                 IRequestConfigurationProvider configurationProvider =
                     RequestConfigurationProvidersFactory.ConfigurationProviderByType(requestType);
-                requestOperator.AssignOperationCallbacks(operationCallback, operationFailCallback);
-                requestOperator.PerformOperation(configurationProvider);
+                requestInteractor.AssignOperationCallbacks(operationCallback, operationFailCallback);
+                requestInteractor.PerformOperation(configurationProvider);
             }
         }
     }

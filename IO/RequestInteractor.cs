@@ -3,7 +3,7 @@ using IO_Project.IO;
 
 namespace IO_Project.JourneyInteraction.Entities
 {
-    class RequestOperator
+    class RequestInteractor
     {
         private IRequestSender requestSender;
 
@@ -12,7 +12,7 @@ namespace IO_Project.JourneyInteraction.Entities
 
         public bool IsBusy { get; private set; }
 
-        public RequestOperator(IRequestSender requestSender)
+        public RequestInteractor(IRequestSender requestSender)
         {
             this.requestSender = requestSender;
         }
