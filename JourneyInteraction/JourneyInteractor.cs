@@ -23,9 +23,9 @@ namespace IO_Project.JourneyInteraction
             requestSender.Send(request);
         }
 
-        private CreateJourneyPayload GetPayload()
+        private JourneyCreationPayload GetPayload()
         {
-            return new CreateJourneyPayload(creationView.Name, creationView.Description, creationView.Location, creationView.Date);
+            return new JourneyCreationPayload(creationView.Name, creationView.Description, creationView.Location, creationView.Date);
         }
 
         private bool IsSetupValid()
