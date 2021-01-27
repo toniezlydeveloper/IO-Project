@@ -18,9 +18,16 @@ namespace IO_Project
 
             SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-B6D6O41;Initial Catalog=IO_proj1;Integrated Security=True;Pooling=False");
             DatabaseInteractor dupa = new DatabaseInteractor();
-            dupa.checkUserNames();
-            JourneyCreationQueryExecutor dupa2 = new JourneyCreationQueryExecutor(con);
-            dupa2.insertJourneyToDatabase("lezore", "wycieczka szkolna", "nie wiem jakis string lokation", "24/10/2021");
+            //JourneyCreationQueryExecutor dupa2 = new JourneyCreationQueryExecutor(con);
+            // dupa2.insertJourneyToDatabase("Warszawa", "tu chodzilismy na kremowki", "nie wiem jakis string lokation", "12/10/2021");
+            //dupa2.insertJourneyToDatabase("Watykan", "Wycieczka do stolicy polski", "nie wiem jakis string lokation", "21/10/2021");
+            //dupa2.insertJourneyToDatabase("Morenka", "Kazdy wie co tu sie dzialo", "nie wiem jakis string lokation", "11/10/2021");
+            //dupa2.updateJourneyToDatabase("Warszawa", "Wadowice", "nie wiem", "po co ", "to komu");
+            //dupa2.addParticipantToJourneyInDatabase("lezore", "Tomasz Stach");
+            //dupa2.addStageToDatabase("lezore", "Podroz do tunezji", "fajnie byo", "jakisPath");
+            // dupa2.modifyStageInDatabase("po co", "Podroz do tunezji", "GOMBAO GOMBAO", "tu ", "to");
+            StageModificationQueryExecutor dupa69 = new StageModificationQueryExecutor(con);
+
 
         }
     }
