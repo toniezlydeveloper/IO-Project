@@ -1,9 +1,6 @@
-﻿using IO_Project.IO.Payloads;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Text;
+﻿using System.Data;
+using IO_Project.Core.QueryExecutors;
+using IO_Project.IO.Payloads;
 
 namespace IO_Project.IO.Entities
 {
@@ -12,7 +9,6 @@ namespace IO_Project.IO.Entities
         private SqlConnection connection;
 
         public RequestType HandledRequestType => RequestType.AssignStage;
-        public Type HandlePayloadType => typeof(StageAssignmentPayload);
 
         public StageAssignmentQueryExecutor(SqlConnection connection)
         {
@@ -25,7 +21,7 @@ namespace IO_Project.IO.Entities
             addStageToDatabase(payload.JourneyName, payload.StageName, payload.Description, payload.IconPath);
         }
 
-       
+
         private void addStageToDatabase(string journeyName, string stageName, string description, string iconPath)
         {
             connection.Open();
