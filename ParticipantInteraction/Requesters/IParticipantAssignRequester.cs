@@ -2,7 +2,7 @@
 
 namespace IO_Project.ParticipantInteraction
 {
-    interface IParticipantAssigner
+    interface IParticipantAssignRequester
     {
         void AssignParitcipant(Action assignCallback, Action assignFailCallback);
     }

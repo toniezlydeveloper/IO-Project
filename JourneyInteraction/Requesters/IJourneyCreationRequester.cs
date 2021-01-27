@@ -2,7 +2,7 @@
 
 namespace IO_Project.JourneyInteraction
 {
-    interface IJourneyCreator
+    interface IJourneyCreationRequester
     {
         void CreateJourney(Action creationCallback, Action creationFailCallback);
     }

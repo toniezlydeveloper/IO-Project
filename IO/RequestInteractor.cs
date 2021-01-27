@@ -5,14 +5,14 @@ namespace IO_Project.JourneyInteraction.Entities
 {
     class RequestInteractor
     {
-        private IRequestSender requestSender;
+        private IRequestProcesssor requestSender;
 
         protected Action operationCallback;
         protected Action operationFailCallback;
 
         public bool IsBusy { get; private set; }
 
-        public RequestInteractor(IRequestSender requestSender)
+        public RequestInteractor(IRequestProcesssor requestSender)
         {
             this.requestSender = requestSender;
         }
@@ -30,7 +30,7 @@ namespace IO_Project.JourneyInteraction.Entities
                 .WithCallback(FinalizeOperation)
                 .WithFailCallback(FinalizeFailedOperation)
                 .Build();
-            requestSender.Send(request);
+            requestSender.Process(request);
             IsBusy = true;
         }
 

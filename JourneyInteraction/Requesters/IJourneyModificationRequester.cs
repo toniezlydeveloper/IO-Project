@@ -2,7 +2,7 @@
 
 namespace IO_Project.JourneyInteraction
 {
-    interface IJourneyModifier
+    interface IJourneyModificationRequester
     {
         void ModifyJourney(Action modificationCallback, Action modificationFailCallback);
     }
