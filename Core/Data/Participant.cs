@@ -2,7 +2,11 @@
 {
     public class Participant
     {
-        string Name { get; }
-        string Surname { get; }
+        string FullName { get; }
+
+        public Participant(string fullName)
+        {
+            FullName = fullName;
+        }
     }
 }

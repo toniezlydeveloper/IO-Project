@@ -3,16 +3,16 @@ using IO_Project.JourneyInteraction.Entities;
 
 namespace IO_Project.IO
 {
-    abstract class AInteractor
+    abstract class ARequester
     {
         private RequestInteractor requestInteractor;
 
-        public AInteractor(RequestInteractor requestInteractor)
+        public ARequester(RequestInteractor requestInteractor)
         {
             this.requestInteractor = requestInteractor;
         }
 
-        protected void TryInteracting(RequestType requestType, Action operationCallback, Action operationFailCallback)
+        protected void TryRequesting(RequestType requestType, Action operationCallback, Action operationFailCallback)
         {
             if (requestInteractor.IsBusy)
             {

@@ -11,29 +11,19 @@ namespace IO_Project.Core
     {
         private List<Journey> journeys = new List<Journey>();
 
-        public bool CanAddJourney(Journey journey)
-        {
-            return false;
-        }
-
         public void AddJourney(Journey journey)
         {
             journeys.Add(journey);
         }
 
-        public bool CanAddStageToJourney(Stage stage, Journey journey)
+        public Journey JourneyByName(string name)
         {
-            return false;
+            throw new NotImplementedException();
         }
 
-        public void AssignStageToJourney(Stage stage, Journey journey)
+        public void AddParticipant(Participant participant)
         {
-            
-        }
-
-        public bool CanAssignParticipantToJourney(Participant participant, Journey journey)
-        {
-            return false;
+            throw new NotImplementedException();
         }
 
         public void AssignParticipantToJourney(Participant participant, Journey journey)

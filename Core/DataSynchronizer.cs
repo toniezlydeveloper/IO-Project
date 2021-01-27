@@ -9,26 +9,27 @@ namespace IO_Project.Core
     {
         public void Process(Request request)
         {
-            if (IsRequestValid(request))
+            if (CanProcessRequest(request))
             {
                 ExecuteRequest(request);
             }
             else
             {
-                FailRequest(request);
+                InformAboutRequestFail(request);
             }
         }
 
-        private bool IsRequestValid(Request request)
+        private bool CanProcessRequest(Request request)
         {
-            var validator = RequestValidatorsFactory.RequestValidatorByType(request.Type);
-            return validator.IsRequestValid(request);
+            var modifier = JournalModifiersFactory.JournalModifierByType(request.Type);
+            return modifier.CanPerformModification(request);
         }
 
         private void ExecuteRequest(Request request)
         {
             ModifyJournal(request);
             SynchronizeWithDatabase(request);
+            InformAboutRequestSuccess(request);
         }
 
         private void ModifyJournal(Request request)
@@ -43,7 +44,12 @@ namespace IO_Project.Core
             executor.ExecuteQuery(request);
         }
 
-        private void FailRequest(Request request)
+        private void InformAboutRequestSuccess(Request request)
+        {
+            request.Callback?.Invoke();
+        }
+
+        private void InformAboutRequestFail(Request request)
         {
             request.FailCallback?.Invoke();
         }

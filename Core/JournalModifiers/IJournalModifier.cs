@@ -9,6 +9,7 @@ namespace IO_Project.Core
     {
         RequestType HandledRequestType { get; }
 
+        bool CanPerformModification(Request request);
         void ModifyJournal(Request request);
     }
 }

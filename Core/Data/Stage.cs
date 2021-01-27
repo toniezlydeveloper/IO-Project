@@ -2,8 +2,15 @@
 {
     public class Stage
     {
-        string Name { get; set; }
-        string Description { get; set; }
-        string IconPath { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string IconPath { get; set; }
+
+        public Stage(string stageName, string description, string iconPath)
+        {
+            Name = stageName;
+            Description = description;
+            IconPath = iconPath;
+        }
     }
 }

@@ -4,7 +4,7 @@ using IO_Project.JourneyInteraction.Entities;
 
 namespace IO_Project.StageInteraction
 {
-    class StageInteractor : AInteractor, IStageAssigner, IStageModifier
+    class StageInteractor : ARequester, IStageAssignRequester, IStageModificationRequester
     {
         public StageInteractor(RequestInteractor requestInteractor)
             : base(requestInteractor)
@@ -13,12 +13,12 @@ namespace IO_Project.StageInteraction
 
         public void AssignStage(Action assignCallback, Action assignFailCallback)
         {
-            TryInteracting(RequestType.AssignStage, assignCallback, assignFailCallback);
+            TryRequesting(RequestType.AssignStage, assignCallback, assignFailCallback);
         }
 
         public void ModifyStage(Action modificationCallback, Action modificationFailCallback)
         {
-            TryInteracting(RequestType.ModifyStage, modificationCallback, modificationFailCallback);
+            TryRequesting(RequestType.ModifyStage, modificationCallback, modificationFailCallback);
         }
     }
 }
