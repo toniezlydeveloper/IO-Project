@@ -9,7 +9,7 @@ namespace IO_Project.JourneyInteraction.Entities
 
         public RequestType HandledRequestType => RequestType.CreateJourney;
         public object Payload => new JourneyCreationPayload(creationView.Name,
-            creationView.Description, creationView.Location, creationView.Date);
+            creationView.Description, creationView.Date);
 
         public CreateJourneyConfigurationProvider(IJourneyView journeyView)
         {

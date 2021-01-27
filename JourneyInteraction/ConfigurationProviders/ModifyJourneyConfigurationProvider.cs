@@ -10,7 +10,7 @@ namespace IO_Project.JourneyInteraction.Entities
 
         public RequestType HandledRequestType => RequestType.ModifyJourney;
         public object Payload => new JourneyModificationPayload(modifiedView.Name,
-            modificationView.Name, modificationView.Description, modificationView.Location, modificationView.Date);
+            modificationView.Name, modificationView.Description, modificationView.Date);
 
         public ModifyJourneyConfigurationProvider(IJourneyView modifiedView, IJourneyView modificationView)
         {

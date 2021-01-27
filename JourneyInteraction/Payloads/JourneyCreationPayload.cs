@@ -4,14 +4,12 @@
     {
         public string Name { get; }
         public string Description { get; }
-        public string Location { get; }
         public string Date { get; }
 
-        public JourneyCreationPayload(string name, string description, string location, string date)
+        public JourneyCreationPayload(string name, string description, string date)
         {
             Name = name;
             Description = description;
-            Location = location;
             Date = date;
         }
     }
