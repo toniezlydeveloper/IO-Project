@@ -9,69 +9,45 @@ using System.Windows.Forms;
 
 namespace IO_Project.Panels
 {
-    public partial class ModifyJourney : Form, IJourneyView
+    public partial class ModifyJourney : Form, IPanelToggle, IJourneyView
     {
+        public event Action<PanelType> OnToggleRequired;
+        private IJourneyModificationRequester modificationRequester;
 
-       string IJourneyView.Name
-        {
-            get
-            {
-                return TitleBox.Text;
-            }
-        }
+        string IJourneyView.Name => TitleBox.Text;
+        public string Description => DescriptionBox.Text;
 
+        public string Date => DateBox.Text;
 
-        public string Description
-        {
-            get
-            {
-                
-                return DescriptionBox.Text;
-            }
-
-        }
-        
-        public string Date
-        {
-
-            get
-            {
-               
-                return DateBox.Text;
-            }
-        }
         public ModifyJourney()
         {
 
             InitializeComponent();
-            //  presenter = new JourneyPresenter(journey, this);
-        //    SubscribeToModelEvents();
-        }
-        /*
-        private void SubscribeToModelEvents()
-        {
-            
+        
         }
 
-
-        */
-        private void DescriptionBox_TextChanged(object sender, EventArgs e)
+        public ModifyJourney(IJourneyModificationRequester modificationRequester) : base()
         {
-
+            this.modificationRequester = modificationRequester;
         }
-
-
-
-        private void DateBox_TextChanged(object sender, EventArgs e)
-        {
-
-        } 
 
         private void SaveAndQuit_Click(object sender, EventArgs e)
         {
-
+            modificationRequester.ModifyJourney(ChangePanel, InformAboutFail);
         }
 
-      
+       
+
+        private void ChangePanel()
+        {
+            OnToggleRequired?.Invoke(0);
+        }
+
+        private void InformAboutFail()
+        {
+            MessageBox.Show("Couldn't modify journey.");
+        }
+
+
     }
 }
