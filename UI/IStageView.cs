@@ -2,8 +2,8 @@
 {
     interface IStageView
     {
-        string Name { get; set; }
-        string Description { get; set; }
-        string IconPath { get; set; }
+        string Name { get; }
+        string Description { get; }
+        string IconPath { get; }
     }
 }

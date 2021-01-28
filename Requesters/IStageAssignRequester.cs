@@ -2,7 +2,7 @@
 
 namespace IO_Project.StageInteraction
 {
-    interface IStageAssignRequester
+    public interface IStageAssignRequester
     {
         void AssignStage(Action assignCallback, Action assignFailCallback);
     }

@@ -85,6 +85,7 @@ namespace IO_Project.Panels
             this.SaveAndQuit.TabIndex = 19;
             this.SaveAndQuit.Text = "Zapisz i wyjdz";
             this.SaveAndQuit.UseVisualStyleBackColor = false;
+            this.SaveAndQuit.Click += new System.EventHandler(this.SaveAndQuit_Click);
             // 
             // Cancel
             // 
@@ -126,6 +127,7 @@ namespace IO_Project.Panels
             this.SetPicture.TabIndex = 23;
             this.SetPicture.Text = "Ustaw jako miniaturke";
             this.SetPicture.UseVisualStyleBackColor = true;
+            this.SetPicture.Click += new System.EventHandler(this.SetPicture_Click);
             // 
             // AddNewPart
             // 
