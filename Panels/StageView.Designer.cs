@@ -33,7 +33,7 @@ namespace IO_Project.Panels
             this.label1 = new System.Windows.Forms.Label();
             this.JourneyNameLabel = new System.Windows.Forms.Label();
             this.PartTitleLabel = new System.Windows.Forms.Label();
-            this.PartDescritpitonLabel = new System.Windows.Forms.Label();
+            this.PartDescriptionLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ModifyStage
@@ -45,6 +45,7 @@ namespace IO_Project.Panels
             this.ModifyStage.TabIndex = 25;
             this.ModifyStage.Text = "Edytuj etap";
             this.ModifyStage.UseVisualStyleBackColor = true;
+            this.ModifyStage.Click += new System.EventHandler(this.ModifyStage_Click);
             // 
             // label1
             // 
@@ -74,20 +75,20 @@ namespace IO_Project.Panels
             this.PartTitleLabel.TabIndex = 28;
             this.PartTitleLabel.Text = "Tytul etapu";
             // 
-            // PartDescritpitonLabel
+            // PartDescriptionLabel
             // 
-            this.PartDescritpitonLabel.Location = new System.Drawing.Point(25, 86);
-            this.PartDescritpitonLabel.Name = "PartDescritpitonLabel";
-            this.PartDescritpitonLabel.Size = new System.Drawing.Size(745, 190);
-            this.PartDescritpitonLabel.TabIndex = 29;
-            this.PartDescritpitonLabel.Text = "Opis etapu";
+            this.PartDescriptionLabel.Location = new System.Drawing.Point(25, 86);
+            this.PartDescriptionLabel.Name = "PartDescriptionLabel";
+            this.PartDescriptionLabel.Size = new System.Drawing.Size(745, 190);
+            this.PartDescriptionLabel.TabIndex = 29;
+            this.PartDescriptionLabel.Text = "Opis etapu";
             // 
             // StageView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.PartDescritpitonLabel);
+            this.Controls.Add(this.PartDescriptionLabel);
             this.Controls.Add(this.PartTitleLabel);
             this.Controls.Add(this.JourneyNameLabel);
             this.Controls.Add(this.label1);
@@ -104,6 +105,6 @@ namespace IO_Project.Panels
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label JourneyNameLabel;
         private System.Windows.Forms.Label PartTitleLabel;
-        private System.Windows.Forms.Label PartDescritpitonLabel;
+        private System.Windows.Forms.Label PartDescriptionLabel;
     }
 }

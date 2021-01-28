@@ -6,6 +6,7 @@ namespace IO_Project.Panels
 {
     public enum PanelType
     {
-        AssignStage
+        AssignStage,
+        AssignParticipant
     }
 }

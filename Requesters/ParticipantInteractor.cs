@@ -11,7 +11,7 @@ namespace IO_Project.ParticipantInteraction
         {
         }
 
-        public void AssignParitcipant(Action assignCallback, Action assignFailCallback)
+        public void AssignParticipant(Action assignCallback, Action assignFailCallback)
         {
             TryRequesting(RequestType.AssignParticipant, assignCallback, assignFailCallback);
         }

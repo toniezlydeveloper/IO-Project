@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace IO_Project.Panels
 {
-    public partial class ModifyJourney : Form, IJourneyView, IJourneyModifier
+    public partial class ModifyJourney : Form, IJourneyView
     {
 
        string IJourneyView.Name
@@ -72,9 +72,6 @@ namespace IO_Project.Panels
 
         }
 
-        void IJourneyModifier.ModifyJourney(Action modificationCallback, Action modificationFailCallback)
-        {
-            
-        }
+      
     }
 }

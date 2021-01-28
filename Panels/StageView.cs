@@ -9,21 +9,43 @@ using System.Windows.Forms;
 
 namespace IO_Project.Panels
 {
-    public partial class StageView : Form, IStageView
+    public partial class StageView : Form, IPanelToggle, IStageView
     {
+        public event Action<PanelType> OnToggleRequired;
+        private IStageAssignRequester assignRequester;
+
         public StageView()
         {
             InitializeComponent();
         }
 
-        public string Description
+        public StageView(IStageAssignRequester assignRequester) : base()
         {
-            get => throw new NotImplementedException();
-            set
-            {
-                PartDescritpitonLabel.Text = value;
-            }
+            this.assignRequester = assignRequester;
         }
-        public string IconPath { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public string Description => PartDescriptionLabel.Text;
+
+        public string IconPath { get; private set; }
+        private void ModifyStage_Click(object sender, EventArgs e)
+        {
+            assignRequester.AssignStage(ChangePanel, InformAboutFail);
+        }
+
+       
+
+        private void ChangePanel()
+        {
+            OnToggleRequired?.Invoke(0);
+        }
+
+        private void InformAboutFail()
+        {
+            MessageBox.Show("Couldn't assign stage.");
+        }
     }
+
+
+
 }
+

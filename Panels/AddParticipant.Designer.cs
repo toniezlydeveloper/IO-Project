@@ -37,9 +37,9 @@ namespace IO_Project.Panels
             this.SaveAndQuit = new System.Windows.Forms.Button();
             this.Cancel = new System.Windows.Forms.Button();
             this.ListOfParticipants = new System.Windows.Forms.ListView();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.Imie = new System.Windows.Forms.ColumnHeader();
             this.Nazwisko = new System.Windows.Forms.ColumnHeader();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // ParticipantsInfo
@@ -85,6 +85,7 @@ namespace IO_Project.Panels
             this.SetPicture.TabIndex = 24;
             this.SetPicture.Text = "Dodaj uczestnika";
             this.SetPicture.UseVisualStyleBackColor = false;
+            this.SetPicture.Click += new System.EventHandler(this.SetPicture_Click);
             // 
             // label1
             // 
@@ -137,6 +138,16 @@ namespace IO_Project.Panels
             this.ListOfParticipants.UseCompatibleStateImageBehavior = false;
             this.ListOfParticipants.View = System.Windows.Forms.View.Details;
             // 
+            // Imie
+            // 
+            this.Imie.Text = "Imie";
+            this.Imie.Width = 172;
+            // 
+            // Nazwisko
+            // 
+            this.Nazwisko.Text = "Nazwisko";
+            this.Nazwisko.Width = 172;
+            // 
             // richTextBox1
             // 
             this.richTextBox1.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -147,16 +158,6 @@ namespace IO_Project.Panels
             this.richTextBox1.Size = new System.Drawing.Size(185, 37);
             this.richTextBox1.TabIndex = 29;
             this.richTextBox1.Text = "Lista uczestnikow";
-            // 
-            // Imie
-            // 
-            this.Imie.Text = "Imie";
-            this.Imie.Width = 172;
-            // 
-            // Nazwisko
-            // 
-            this.Nazwisko.Text = "Nazwisko";
-            this.Nazwisko.Width = 172;
             // 
             // AddParticipant
             // 
