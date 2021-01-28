@@ -10,6 +10,12 @@ namespace IO_Project.Core
         private List<Journey> journeys = new List<Journey>();
         private List<Participant> participants = new List<Participant>();
 
+        public Journal(List<Journey> journeys, List<Participant> participants)
+        {
+            this.journeys = journeys;
+            this.participants = participants;
+        }
+
         public void AddJourney(Journey journey)
         {
             journeys.Add(journey);
