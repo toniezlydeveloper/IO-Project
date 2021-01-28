@@ -32,9 +32,18 @@ namespace IO_Project.JourneyInteraction
             stages.Add(stage);
         }
 
+        public void AddStages(List<Stage> stages)
+        {
+            stages.AddRange(stages);
+        }
+
         public void AssignParticipant(Participant participant)
         {
             participants.Add(participant);
+        }
+        public void AssignParticipants(List<Participant> participants)
+        {
+            participants.AddRange(participants);
         }
     }
 }
