@@ -40,6 +40,7 @@ namespace IO_Project.Panels
             this.DescriptionLabel = new System.Windows.Forms.Label();
             this.PartTitleLabel = new System.Windows.Forms.Label();
             this.PartDescriptionLabel = new System.Windows.Forms.Label();
+            this.DateLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.StagePicture)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,6 +87,7 @@ namespace IO_Project.Panels
             this.ModifyJourney.TabIndex = 11;
             this.ModifyJourney.Text = "Edytuj podroz";
             this.ModifyJourney.UseVisualStyleBackColor = true;
+            this.ModifyJourney.Click += new System.EventHandler(this.ModifyJourney_Click);
             // 
             // DeletePart
             // 
@@ -121,7 +123,6 @@ namespace IO_Project.Panels
             this.TitleLabel.Size = new System.Drawing.Size(546, 44);
             this.TitleLabel.TabIndex = 19;
             this.TitleLabel.Text = "TitleLabel";
-           
             // 
             // DescriptionLabel
             // 
@@ -138,7 +139,6 @@ namespace IO_Project.Panels
             this.PartTitleLabel.Size = new System.Drawing.Size(289, 50);
             this.PartTitleLabel.TabIndex = 21;
             this.PartTitleLabel.Text = "PartTitleLabel";
-          
             // 
             // PartDescriptionLabel
             // 
@@ -147,7 +147,14 @@ namespace IO_Project.Panels
             this.PartDescriptionLabel.Size = new System.Drawing.Size(364, 102);
             this.PartDescriptionLabel.TabIndex = 22;
             this.PartDescriptionLabel.Text = "PartDescriptionLabel";
-            
+            // 
+            // DateLabel
+            // 
+            this.DateLabel.Location = new System.Drawing.Point(609, 13);
+            this.DateLabel.Name = "DateLabel";
+            this.DateLabel.Size = new System.Drawing.Size(161, 23);
+            this.DateLabel.TabIndex = 23;
+            this.DateLabel.Text = "Data";
             // 
             // JourneyView
             // 
@@ -155,6 +162,7 @@ namespace IO_Project.Panels
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.DateLabel);
             this.Controls.Add(this.PartDescriptionLabel);
             this.Controls.Add(this.PartTitleLabel);
             this.Controls.Add(this.DescriptionLabel);
@@ -186,5 +194,6 @@ namespace IO_Project.Panels
         private System.Windows.Forms.Label DescriptionLabel;
         private System.Windows.Forms.Label PartTitleLabel;
         private System.Windows.Forms.Label PartDescriptionLabel;
+        private System.Windows.Forms.Label DateLabel;
     }
 }
