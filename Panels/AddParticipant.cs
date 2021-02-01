@@ -21,6 +21,7 @@ namespace IO_Project.Panels
         public AddParticipant(IParticipantAssignRequester assignRequester) : base()
         {
             this.assignRequester = assignRequester;
+            InitializeComponent();
         }
         public string FullName => FirstName.Text + LastName.Text;
 
@@ -37,6 +38,11 @@ namespace IO_Project.Panels
         private void InformAboutFail()
         {
             MessageBox.Show("Couldn't assign participant.");
+        }
+
+        private void ParticipantsInfo_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

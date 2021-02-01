@@ -26,6 +26,7 @@ namespace IO_Project.Panels
         public AddNewPart(IStageAssignRequester assignRequester) : base()
         {
             this.assignRequester = assignRequester;
+            InitializeComponent();
         }
 
         private void SaveAndQuit_Click(object sender, EventArgs e)

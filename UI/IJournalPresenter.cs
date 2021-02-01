@@ -3,7 +3,7 @@ using IO_Project.Core;
 
 namespace IO_Project.JourneyInteraction
 {
-    interface IJournalPresenter
+    public interface IJournalPresenter
     {
         void PresentJourneySet(Journal journal);
     }

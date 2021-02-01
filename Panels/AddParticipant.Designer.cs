@@ -47,11 +47,12 @@ namespace IO_Project.Panels
             this.ParticipantsInfo.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ParticipantsInfo.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ParticipantsInfo.ForeColor = System.Drawing.Color.Black;
-            this.ParticipantsInfo.Location = new System.Drawing.Point(12, 26);
+            this.ParticipantsInfo.Location = new System.Drawing.Point(12, 29);
             this.ParticipantsInfo.Name = "ParticipantsInfo";
             this.ParticipantsInfo.Size = new System.Drawing.Size(280, 61);
             this.ParticipantsInfo.TabIndex = 14;
             this.ParticipantsInfo.Text = "Ponizej wpisz imie i nazwisko uczestnika podrozy";
+            this.ParticipantsInfo.TextChanged += new System.EventHandler(this.ParticipantsInfo_TextChanged);
             // 
             // FirstName
             // 

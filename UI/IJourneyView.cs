@@ -1,6 +1,6 @@
 ﻿namespace IO_Project.JourneyInteraction
 {
-    interface IJourneyView
+    public interface IJourneyView
     {
         string Name { get;}
         string Description { get;}

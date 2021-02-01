@@ -10,6 +10,7 @@ using IO_Project.IO;
 using IO_Project.IO.Entities;
 using IO_Project.JourneyInteraction;
 using IO_Project.JourneyInteraction.Entities;
+using IO_Project.Panels;
 using IO_Project.ParticipantInteraction;
 using IO_Project.ParticipantInteraction.Entities;
 using IO_Project.StageInteraction;
@@ -26,6 +27,13 @@ namespace IO_Project
         private static JourneyInteractor journeyInteractor;
         private static ParticipantInteractor participantInteractor;
         private static DataSynchronizer dataSynchronizer;
+        private static AddNewPart addStageView;
+        private static AddParticipant addParticipantView;
+        private static ModifyJourney modifyJourneyView;
+        private static JourneyView journeyView;
+        private static JournalView journalView;
+        private static AddJourney addJourneyView;
+        private static CreateJourneyConfigurationProvider createJourneyConfigurationProvider;
 
         [STAThread]
         static void Main()
@@ -33,8 +41,8 @@ namespace IO_Project
             Initialize();
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+         //   Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(journalView);
         }
 
         private static void Initialize()
@@ -65,7 +73,14 @@ namespace IO_Project
 
         private static void CreateViews()
         {
-            throw new NotImplementedException();
+            //    throw new NotImplementedException();
+            
+            addStageView = new AddNewPart(stageInteractor);
+            journeyView = new JourneyView(journeyInteractor, stageInteractor);
+            addParticipantView = new AddParticipant(participantInteractor);
+            modifyJourneyView = new ModifyJourney(journeyInteractor);
+            addJourneyView = new AddJourney(journeyInteractor);
+            journalView = new JournalView(journal);
         }
 
         private static void CreateQueryExecutors()
@@ -92,7 +107,7 @@ namespace IO_Project
         {
             RegisterRequestConfigurationProvider(new AssignParticipantConfigurationProvider(null, null));
             RegisterRequestConfigurationProvider(new AssignStageConfigurationProvider(null, null));
-            RegisterRequestConfigurationProvider(new CreateJourneyConfigurationProvider(null));
+            RegisterRequestConfigurationProvider(new CreateJourneyConfigurationProvider(addJourneyView));
             RegisterRequestConfigurationProvider(new CreateParticipantConfigurationProvider(null));
             RegisterRequestConfigurationProvider(new ModifyJourneyConfigurationProvider(null, null));
             RegisterRequestConfigurationProvider(new ModifyStageConfigurationProvider(null, null, null));

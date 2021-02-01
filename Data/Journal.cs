@@ -5,7 +5,7 @@ using IO_Project.ParticipantInteraction;
 
 namespace IO_Project.Core
 {
-    class Journal
+    public class Journal
     {
         private List<Journey> journeys = new List<Journey>();
         private List<Participant> participants = new List<Participant>();
@@ -14,6 +14,10 @@ namespace IO_Project.Core
         {
             this.journeys = journeys;
             this.participants = participants;
+        }
+
+        public List<Journey> getJourneys() {
+            return this.journeys;
         }
 
         public void AddJourney(Journey journey)
@@ -25,6 +29,8 @@ namespace IO_Project.Core
         {
             return journeys.First(journey => journey.Name == name);
         }
+
+       
 
         public void AddParticipant(Participant participant)
         {

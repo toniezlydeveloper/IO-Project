@@ -5,16 +5,20 @@ using System.Windows.Forms;
 
 namespace IO_Project.Panels
 {
-    public partial class JourneyView : Form, IPanelToggle, IJourneyView, IStageView {
+    public partial class JourneyView : Form, IPanelToggle, IJourneyView, IStageView, IJourneyPresenter {
 
         private IJourneyModificationRequester journeyModificationRequester;
         private IStageAssignRequester stageAssignRequester;
 
-        public JourneyView()
+        private Journey journey;
+        public JourneyView(Journey journey)
         {
             InitializeComponent();
+            this.journey = journey;
+            PresentJourney(this.journey);
+           
         }
-
+        string IJourneyView.Name => TitleLabel.Text;
         public string Description => DescriptionLabel.Text;
 
         public string Date => DateLabel.Text;
@@ -33,8 +37,10 @@ namespace IO_Project.Panels
 
         public JourneyView(IJourneyModificationRequester modifyRequester, IStageAssignRequester assignRequester) : base()
         {
+            InitializeComponent();
             this.journeyModificationRequester = modifyRequester;
             this.stageAssignRequester = assignRequester;
+           
         }
 
        
@@ -49,6 +55,14 @@ namespace IO_Project.Panels
         private void InformAboutFail()
         {
             MessageBox.Show("Couldn't assign stage.");
+        }
+
+        public void PresentJourney(Journey journey)
+        {
+            TitleLabel.Text = journey.Name;
+            DescriptionLabel.Text = journey.Description;
+            DateLabel.Text = journey.Date;
+            
         }
     }
 }

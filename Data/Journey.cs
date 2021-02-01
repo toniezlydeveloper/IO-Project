@@ -5,7 +5,7 @@ using IO_Project.StageInteraction;
 
 namespace IO_Project.JourneyInteraction
 {
-    class Journey
+    public class Journey
     {
         private List<Stage> stages { get; } = new List<Stage>();
         private List<Participant> participants { get; } = new List<Participant>();

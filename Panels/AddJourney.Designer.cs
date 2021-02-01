@@ -1,7 +1,7 @@
 ﻿
 namespace IO_Project.Panels
 {
-    partial class ModifyJourney
+    partial class AddJourney
     {
         /// <summary>
         /// Required designer variable.
@@ -58,7 +58,7 @@ namespace IO_Project.Panels
             this.DescriptionBox.Size = new System.Drawing.Size(776, 241);
             this.DescriptionBox.TabIndex = 8;
             this.DescriptionBox.Text = "Opis podrozy";
-           
+
             // 
             // DateBox
             // 
@@ -70,7 +70,7 @@ namespace IO_Project.Panels
             this.DateBox.Size = new System.Drawing.Size(776, 43);
             this.DateBox.TabIndex = 10;
             this.DateBox.Text = "Data podrozy";
-         
+
             // 
             // SaveAndQuit
             // 
@@ -121,8 +121,8 @@ namespace IO_Project.Panels
             this.Controls.Add(this.DateBox);
             this.Controls.Add(this.DescriptionBox);
             this.Controls.Add(this.TitleBox);
-            this.Name = "ModifyJourney";
-            this.Text = "ModifyJourney";
+            this.Name = "AddJourney";
+            this.Text = "AddJourney";
             this.ResumeLayout(false);
             this.PerformLayout();
 
