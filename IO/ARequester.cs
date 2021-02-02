@@ -24,6 +24,7 @@ namespace IO_Project.IO
                     RequestConfigurationProvidersFactory.ConfigurationProviderByType(requestType);
                 requestInteractor.AssignOperationCallbacks(operationCallback, operationFailCallback);
                 requestInteractor.PerformOperation(configurationProvider);
+                
             }
         }
     }

@@ -9,26 +9,26 @@ using System.Windows.Forms;
 
 namespace IO_Project.Panels
 {
-    public partial class ModifyJourney : Form, IPanelToggle, IJourneyView
+    public partial class ModifyJourney : Form, IPanelToggle, IJourneyView, IJourneyPresenter
     {
         public event Action<PanelType> OnToggleRequired;
+
+        private Journey journey;
+
         private IJourneyModificationRequester modificationRequester;
 
-        string IJourneyView.Name => TitleBox.Text;
-        public string Description => DescriptionBox.Text;
+        string IJourneyView.Name => this.TitleBox.Text;
+        public string Description => this.DescriptionBox.Text;
 
-        public string Date => DateBox.Text;
+        public string Date => this.DateBox.Text;
 
-        public ModifyJourney()
-        {
 
-            InitializeComponent();
-        
-        }
 
         public ModifyJourney(IJourneyModificationRequester modificationRequester) : base()
         {
+            InitializeComponent();
             this.modificationRequester = modificationRequester;
+
         }
 
         private void SaveAndQuit_Click(object sender, EventArgs e)
@@ -36,11 +36,15 @@ namespace IO_Project.Panels
             modificationRequester.ModifyJourney(ChangePanel, InformAboutFail);
         }
 
-       
+
 
         private void ChangePanel()
         {
             OnToggleRequired?.Invoke(0);
+            this.Hide();
+            Program.journalView.deleteControls();
+            Program.journalView.PresentJourneySet(Program.journal);
+            Program.journalView.Show();
         }
 
         private void InformAboutFail()
@@ -48,6 +52,12 @@ namespace IO_Project.Panels
             MessageBox.Show("Couldn't modify journey.");
         }
 
-
+        public void PresentJourney(Journey journey)
+        {
+            TitleBox.Text = journey.Name;
+            DescriptionBox.Text = journey.Description;
+            DateBox.Text = journey.Date;
+            this.journey = journey;
+        }
     }
 }

@@ -21,18 +21,18 @@ namespace IO_Project
     static class Program
     {
         private static SqlConnection connection;
-        private static Journal journal;
+        public static Journal journal;
         private static RequestInteractor requestInteractor;
         private static StageInteractor stageInteractor;
-        private static JourneyInteractor journeyInteractor;
+        public static JourneyInteractor journeyInteractor;
         private static ParticipantInteractor participantInteractor;
         private static DataSynchronizer dataSynchronizer;
         private static AddNewPart addStageView;
         private static AddParticipant addParticipantView;
-        private static ModifyJourney modifyJourneyView;
-        private static JourneyView journeyView;
-        private static JournalView journalView;
-        private static AddJourney addJourneyView;
+        public static ModifyJourney modifyJourneyView;
+        public static JourneyView journeyView;
+        public static JournalView journalView;
+        public static AddJourney addJourneyView;
         private static CreateJourneyConfigurationProvider createJourneyConfigurationProvider;
 
         [STAThread]
@@ -41,7 +41,7 @@ namespace IO_Project
             Initialize();
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
-         //   Application.SetCompatibleTextRenderingDefault(false);
+            //   Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(journalView);
         }
 
@@ -72,9 +72,7 @@ namespace IO_Project
         }
 
         private static void CreateViews()
-        {
-            //    throw new NotImplementedException();
-            
+        { 
             addStageView = new AddNewPart(stageInteractor);
             journeyView = new JourneyView(journeyInteractor, stageInteractor);
             addParticipantView = new AddParticipant(participantInteractor);
@@ -109,7 +107,7 @@ namespace IO_Project
             RegisterRequestConfigurationProvider(new AssignStageConfigurationProvider(null, null));
             RegisterRequestConfigurationProvider(new CreateJourneyConfigurationProvider(addJourneyView));
             RegisterRequestConfigurationProvider(new CreateParticipantConfigurationProvider(null));
-            RegisterRequestConfigurationProvider(new ModifyJourneyConfigurationProvider(null, null));
+            RegisterRequestConfigurationProvider(new ModifyJourneyConfigurationProvider(journeyView, modifyJourneyView));
             RegisterRequestConfigurationProvider(new ModifyStageConfigurationProvider(null, null, null));
         }
 
@@ -123,7 +121,7 @@ namespace IO_Project
             JournalModifiersFactory.RegisterJournalModifier(journalModifier);
         }
 
-        private static void RegisterRequestConfigurationProvider(IRequestConfigurationProvider configurationProvider)
+        public static void RegisterRequestConfigurationProvider(IRequestConfigurationProvider configurationProvider)
         {
             RequestConfigurationProvidersFactory.RegisterConfigurationProvider(configurationProvider);
         }

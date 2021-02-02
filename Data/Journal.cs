@@ -27,7 +27,7 @@ namespace IO_Project.Core
 
         public Journey JourneyByName(string name)
         {
-            return journeys.First(journey => journey.Name == name);
+            return journeys.FirstOrDefault(journey => journey.Name == name);
         }
 
        

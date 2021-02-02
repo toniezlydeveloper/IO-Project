@@ -14,10 +14,10 @@ namespace IO_Project.Panels
         public event Action<PanelType> OnToggleRequired;
         private IJourneyCreationRequester creationRequester;
 
-        string IJourneyView.Name => TitleBox.Text;
-        public string Description => DescriptionBox.Text;
+        string IJourneyView.Name => this.TitleBox.Text;
+        public string Description => this.DescriptionBox.Text;
 
-        public string Date => DateBox.Text;
+        public string Date => this.DateBox.Text;
 
         public AddJourney()
         {
@@ -35,6 +35,7 @@ namespace IO_Project.Panels
         private void SaveAndQuit_Click(object sender, EventArgs e)
         {
             creationRequester.CreateJourney(ChangePanel, InformAboutFail);
+
         }
 
        
@@ -42,6 +43,9 @@ namespace IO_Project.Panels
         private void ChangePanel()
         {
             OnToggleRequired?.Invoke(0);
+            this.Hide();
+            Program.journalView.PresentJourneySet(Program.journal);
+            Program.journalView.Show();
         }
 
         private void InformAboutFail()

@@ -1,5 +1,6 @@
 ﻿using IO_Project.Core;
 using IO_Project.JourneyInteraction;
+using IO_Project.JourneyInteraction.Entities;
 using IO_Project.Panels;
 using System;
 using System.Collections.Generic;
@@ -16,52 +17,46 @@ namespace IO_Project
     public partial class JournalView : Form, IJournalPresenter
     {
         Journal journal;
+
+
+        public string Date => throw new NotImplementedException();
+
         public JournalView(Journal journal)
         {
             this.journal = journal;
             InitializeComponent();
             PresentJourneySet(this.journal);
-            
+
         }
 
-        public void PresentJourneySet(Journal journal)
+        public void deleteControls()
         {
-            List<Journey> journeys = journal.getJourneys();
-            //  string title = @"Tytul ";
-            //  TitleBox.Text = journal.JourneyByName(title).Name;
-            //  DescriptionBox.Text = journal.JourneyByName(title).Description;
-            /* foreach(Journey elem in journeys)
-            {
-                elem.Name;
-                elem.Description
 
-            } */
+            this.Controls.Clear();
 
+        }
+        private void DisplayJourneysFromRange(List<Journey> journeys, int min, int max)
+        {
+            
             int verticalOffset;
 
-            for(int i=0; i < journeys.Count(); i++)
+            int pageNumber = min / 3;
+            bool isLast = false;
+
+            if(max >= journeys.Count() - 1)
             {
-               
+                max = journeys.Count() - 1;
+                isLast = true;
+            }
 
-                verticalOffset = i * 190;
-                if(verticalOffset + 190 > this.ClientSize.Height)
-                {
-                    Button addButton = new Button();
-
-                    addButton.Text = "Dodaj podroz";
-                    addButton.Location = new System.Drawing.Point(627, 10 + verticalOffset);
-                    addButton.Size = new System.Drawing.Size(161, 43);
-                    addButton.Click += AddButton_Click;
-
-                    this.Controls.Add(addButton);
-
-                    break;
-                }
+            for (int i = min; i <= max; i++)
+            {
+                verticalOffset = (i-min) * 190;
+                
 
                 Label nameLabel = new Label();
                 Label descriptionLabel = new Label();
-                Button deleteButton = new Button();
-                Button modifyButton = new Button();
+                Button viewButton = new Button();
 
                 descriptionLabel.Text = journeys.ElementAt(i).Description;
                 descriptionLabel.Location = new System.Drawing.Point(0, 147 + verticalOffset);
@@ -71,73 +66,122 @@ namespace IO_Project
                 nameLabel.Location = new System.Drawing.Point(0, 75 + verticalOffset);
                 nameLabel.Size = new System.Drawing.Size(321, 52);
 
-             
-
-                deleteButton.Text = "Usun podroz";
-                deleteButton.Location = new System.Drawing.Point(627, 75 + verticalOffset);
-                deleteButton.Size = new System.Drawing.Size(161, 43 );
-                deleteButton.AccessibleName = journeys.ElementAt(i).Name;
-                deleteButton.Click += DeleteButton_Click;
-
-
-                modifyButton.Text = "Modyfikuj podroz";
-                modifyButton.Location = new System.Drawing.Point(627, 137 + verticalOffset);
-                modifyButton.Size = new System.Drawing.Size(161, 43);
-                modifyButton.AccessibleName = journeys.ElementAt(i).Name;
-                modifyButton.Click += ModifyButton_Click;
+                viewButton.Text = "Przegladaj podroz";
+                viewButton.Location = new System.Drawing.Point(627, 75 + verticalOffset);
+                viewButton.Size = new System.Drawing.Size(161, 86);
+                viewButton.AccessibleName = journeys.ElementAt(i).Name;
+                viewButton.Click += ViewButton_Click;
 
                 this.Controls.Add(nameLabel);
-
                 this.Controls.Add(descriptionLabel);
+                this.Controls.Add(viewButton);
 
-                this.Controls.Add(deleteButton);
 
-                this.Controls.Add(modifyButton);
+
+
+                
             }
+            if (!isLast)
+            {
+                Button nextButton = new Button();
+
+                nextButton.Text = "Nastepne";
+                nextButton.Location = new System.Drawing.Point(327, this.ClientSize.Height - 53);
+                nextButton.Size = new System.Drawing.Size(161, 43);
+                nextButton.AccessibleName = (pageNumber + 1).ToString();
+                nextButton.Click += NextButton_Click;
+
+                this.Controls.Add(nextButton);
+            }
+            if (pageNumber > 0)
+            {
+                Button previousButton = new Button();
+
+            
+                previousButton.Text = "Poprzednie";
+                previousButton.Location = new System.Drawing.Point(27, this.ClientSize.Height - 53);
+                previousButton.Size = new System.Drawing.Size(161, 43);
+                previousButton.AccessibleName = (pageNumber - 1).ToString();
+                previousButton.Click += PreviousButton_Click;
+
+                this.Controls.Add(previousButton);
+            }
+            
+
+            this.DisplayAddButton();
+
+        }
+
+        public void PresentJourneySet(Journal journal)
+        {
+            List<Journey> journeys = journal.getJourneys();
+
+
+
+            this.DisplayJourneysFromRange(journeys, 0, 2);
 
 
         }
 
-        private void ModifyButton_Click(object sender, EventArgs e)
+        private void DisplayAddButton()
+        {
+            
+
+         
+
+
+            Button addButton = new Button();
+
+            addButton.Text = "Dodaj podroz";
+            addButton.Location = new System.Drawing.Point(627, this.ClientSize.Height - 53);
+            addButton.Size = new System.Drawing.Size(161, 43);
+            addButton.Click += AddButton_Click;
+
+            this.Controls.Add(addButton);
+        }
+
+
+        private void ViewButton_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             string name = button.AccessibleName;
+
+            this.Hide();
+
+            Journey journey = this.journal.JourneyByName(name);
+            Program.journeyView.PresentJourney(journey);
+            Program.journeyView.Show();
+        }
+
+        private void NextButton_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            string name = button.AccessibleName;
+            int i = Int32.Parse(name);
+            this.deleteControls();
+            this.DisplayJourneysFromRange(this.journal.getJourneys(), i*3, i*3+2);
             
         }
 
-        private void DeleteButton_Click(object sender, EventArgs e)
+        private void PreviousButton_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             string name = button.AccessibleName;
-            Journey journey = this.journal.JourneyByName(name);
-            JourneyView journeyView = new JourneyView(journey);
-            journeyView.ShowDialog();
+            int i = Int32.Parse(name);
+            this.deleteControls();
+            this.DisplayJourneysFromRange(this.journal.getJourneys(), i*3, i*3+2);
+
         }
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            
-            
-            //handle switching to AddJourney
-            
+            this.Hide();
+            this.deleteControls();
+            Program.addJourneyView.Show();
+
+
         }
 
 
-
-        /*   public void createJourneyRepresentation()
-           {
-
-           }
-
-           private void AddJourney_Click(object sender, EventArgs e)
-           {
-
-           }
-
-
-           private void TitleBox_TextChanged(object sender, EventArgs e)
-           {
-
-           } */
     }
 }
