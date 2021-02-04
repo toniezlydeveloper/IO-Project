@@ -1,7 +1,7 @@
 ﻿
 namespace IO_Project.Panels
 {
-    partial class AddNewPart
+    partial class ModifyPart
     {
         /// <summary>
         /// Required designer variable.
@@ -133,8 +133,8 @@ namespace IO_Project.Panels
             this.Controls.Add(this.label1);
             this.Controls.Add(this.PartDescriptionBox);
             this.Controls.Add(this.PartTitleBox);
-            this.Name = "AddNewPart";
-            this.Text = "AddNewPart";
+            this.Name = "ModifyPart";
+            this.Text = "ModifyPart";
             this.ResumeLayout(false);
             this.PerformLayout();
 

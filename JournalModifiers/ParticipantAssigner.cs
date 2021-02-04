@@ -20,7 +20,7 @@ namespace IO_Project.Core.JournalModifiers
             var payload = (ParticipantAssignmentPayload)request.Payload;
             var journey = journal.JourneyByName(payload.JourneyName);
             var participant = journal.ParticipantByFullName(payload.ParticipantFullName);
-            return participant == default;
+            return participant != default;
         }
 
         public void ModifyJournal(Request request)

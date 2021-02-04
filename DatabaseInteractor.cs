@@ -95,7 +95,7 @@ namespace IO_Project
             List<Stage> journeysList = new List<Stage>();
             SqlCommand SelectCommand = new SqlCommand(
                 "SELECT * FROM Stage " +
-                "WHERE Trip = '" + journeyId + "'" , connection);
+                "WHERE Trip = '" + journeyId + "'", connection);
 
             SqlDataReader myreader;
             myreader = SelectCommand.ExecuteReader();

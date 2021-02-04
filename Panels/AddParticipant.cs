@@ -9,30 +9,42 @@ using System.Windows.Forms;
 
 namespace IO_Project.Panels
 {
-    public partial class AddParticipant : Form, IPanelToggle, IParticipantView
+    public partial class AddParticipant : Form, IPanelToggle, IParticipantView, IParticipantPresenter
     {
         public event Action<PanelType> OnToggleRequired;
         private IParticipantAssignRequester assignRequester;
-        public AddParticipant()
-        {
-            InitializeComponent();
-        }
+        private IParticipantCreationRequester creationRequester;
 
-        public AddParticipant(IParticipantAssignRequester assignRequester) : base()
+        List<Participant> participants;
+
+        public AddParticipant(IParticipantAssignRequester assignRequester, IParticipantCreationRequester creationRequester) : base()
         {
             this.assignRequester = assignRequester;
+            this.creationRequester = creationRequester;
+
             InitializeComponent();
         }
-        public string FullName => FirstName.Text + LastName.Text;
+        public string FullName => FirstName.Text + " " + LastName.Text;
 
         private void SetPicture_Click(object sender, EventArgs e)
         {
-            assignRequester.AssignParticipant(ChangePanel, InformAboutFail);
+            creationRequester.CreateParticipant(Assign, InformAboutCreationFail);
+            Program.requestInteractor.IsBusy = false;
+
         }
 
+        private void Assign()
+        {
+            assignRequester.AssignParticipant(ChangePanel, InformAboutFail);
+            Program.requestInteractor.IsBusy = false;
+        }
         private void ChangePanel()
         {
             OnToggleRequired?.Invoke(0);
+            this.Hide();
+
+
+           
         }
 
         private void InformAboutFail()
@@ -40,9 +52,21 @@ namespace IO_Project.Panels
             MessageBox.Show("Couldn't assign participant.");
         }
 
-        private void ParticipantsInfo_TextChanged(object sender, EventArgs e)
+        private void InformAboutCreationFail()
         {
+            MessageBox.Show("Couldn't create participant.");
+        }
 
+
+
+        public void PresentParticipantSet(List<Participant> participants)
+            
+        {
+            ListOfParticipants.Items.Clear();
+            foreach (Participant e in participants)
+            {
+                ListOfParticipants.Items.Add(e.FullName);
+            }
         }
     }
 }

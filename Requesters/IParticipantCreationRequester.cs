@@ -2,7 +2,7 @@
 
 namespace IO_Project.ParticipantInteraction
 {
-    interface IParticipantCreationRequester
+    public interface IParticipantCreationRequester
     {
         void CreateParticipant(Action creationCallback, Action creationFailCallback);
     }

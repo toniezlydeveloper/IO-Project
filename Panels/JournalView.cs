@@ -37,7 +37,18 @@ namespace IO_Project
         }
         private void DisplayJourneysFromRange(List<Journey> journeys, int min, int max)
         {
+            Label AppTitle = new Label();
+            AppTitle.AutoSize = true;
+            AppTitle.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            AppTitle.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            AppTitle.Location = new System.Drawing.Point(12, 9);
+            AppTitle.Name = "AppTitle";
+            AppTitle.Size = new System.Drawing.Size(257, 37);
+            AppTitle.TabIndex = 1;
+            AppTitle.Text = "Pamietnik z podrozy";
             
+            this.Controls.Add(AppTitle);
+
             int verticalOffset;
 
             int pageNumber = min / 3;

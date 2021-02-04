@@ -6,33 +6,34 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using IO_Project.JourneyInteraction;
 using IO_Project.StageInteraction;
 
 namespace IO_Project.Panels
 {
-    public partial class AddNewPart : Form, IPanelToggle, IStageView
+    public partial class ModifyPart : Form, IPanelToggle, IStagePresenter, IStageView
     {
         public event Action<PanelType> OnToggleRequired;
-        private IStageAssignRequester assignRequester;
+        private IStageModificationRequester modificationRequester;
+
+        private Stage stage;
+        private Journey journey;
 
         string IStageView.Name => PartTitleBox.Text;
         public string IconPath => PartIconPath.Text;
         public string Description => PartDescriptionBox.Text;
 
-        public AddNewPart()
-        {
-            InitializeComponent();
-        }
+        
 
-        public AddNewPart(IStageAssignRequester assignRequester) : base()
+        public ModifyPart(IStageModificationRequester modificationRequester) : base()
         {
-            this.assignRequester = assignRequester;
+            this.modificationRequester = modificationRequester;
             InitializeComponent();
         }
 
         private void SaveAndQuit_Click(object sender, EventArgs e)
         {
-            assignRequester.AssignStage(ChangePanel, InformAboutFail);
+            modificationRequester.ModifyStage(ChangePanel, InformAboutFail);
         }
 
         private void SetPicture_Click(object sender, EventArgs e)
@@ -60,6 +61,15 @@ namespace IO_Project.Panels
         private void InformAboutFail()
         {
             MessageBox.Show("Couldn't assign stage.");
+        }
+
+        public void PresentStage(Stage stage, Journey journey)
+        {
+            PartTitleBox.Text = stage.Name;
+            PartIconPath.Text = stage.IconPath;
+            PartDescriptionBox.Text = stage.Description;
+            this.stage = stage;
+            this.journey = journey;
         }
     }
 }

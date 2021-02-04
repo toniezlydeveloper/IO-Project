@@ -39,7 +39,7 @@ namespace IO_Project.Core
 
         public Participant ParticipantByFullName(string fullName)
         {
-            return participants.First(participant => participant.FullName == fullName);
+            return participants.FirstOrDefault(participant => participant.FullName == fullName);
         }
     }
 }

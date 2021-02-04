@@ -12,6 +12,9 @@
 
   <ItemGroup>
     <Compile Update="Panels\AddJourney.cs" />
+    <Compile Update="Panels\ModifyPart.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

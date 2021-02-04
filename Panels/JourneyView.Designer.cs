@@ -29,171 +29,54 @@ namespace IO_Project.Panels
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.AddNewPart = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.ModifyJourney = new System.Windows.Forms.Button();
-            this.DeletePart = new System.Windows.Forms.Button();
-            this.StagePicture = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.TitleLabel = new System.Windows.Forms.Label();
-            this.DescriptionLabel = new System.Windows.Forms.Label();
-            this.PartTitleLabel = new System.Windows.Forms.Label();
-            this.PartDescriptionLabel = new System.Windows.Forms.Label();
-            this.DateLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.StagePicture)).BeginInit();
+            this.DateBox = new System.Windows.Forms.Label();
+            this.TitleBox = new System.Windows.Forms.Label();
+            this.DescriptionBox = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // DateBox
             // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label1.Location = new System.Drawing.Point(-54, 174);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(917, 15);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "---------------------------------------------------------------------------------" +
-    "--------------------------------------------------------------------------------" +
-    "---------------------";
+            this.DateBox.Location = new System.Drawing.Point(582, 7);
+            this.DateBox.Name = "DateBox";
+            this.DateBox.Size = new System.Drawing.Size(206, 38);
+            this.DateBox.TabIndex = 19;
+            this.DateBox.Text = "Date";
             // 
-            // AddNewPart
+            // TitleBox
             // 
-            this.AddNewPart.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.AddNewPart.Location = new System.Drawing.Point(599, 394);
-            this.AddNewPart.Name = "AddNewPart";
-            this.AddNewPart.Size = new System.Drawing.Size(189, 44);
-            this.AddNewPart.TabIndex = 9;
-            this.AddNewPart.Text = "Dodaj nowy etap";
-            this.AddNewPart.UseVisualStyleBackColor = true;
+            this.TitleBox.Location = new System.Drawing.Point(12, 7);
+            this.TitleBox.Name = "TitleBox";
+            this.TitleBox.Size = new System.Drawing.Size(564, 38);
+            this.TitleBox.TabIndex = 20;
+            this.TitleBox.Text = "Title";
             // 
-            // label2
+            // DescriptionBox
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label2.Location = new System.Drawing.Point(-54, 353);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(917, 15);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "---------------------------------------------------------------------------------" +
-    "--------------------------------------------------------------------------------" +
-    "---------------------";
-            // 
-            // ModifyJourney
-            // 
-            this.ModifyJourney.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ModifyJourney.Location = new System.Drawing.Point(609, 128);
-            this.ModifyJourney.Name = "ModifyJourney";
-            this.ModifyJourney.Size = new System.Drawing.Size(161, 43);
-            this.ModifyJourney.TabIndex = 11;
-            this.ModifyJourney.Text = "Edytuj podroz";
-            this.ModifyJourney.UseVisualStyleBackColor = true;
-            this.ModifyJourney.Click += new System.EventHandler(this.ModifyJourney_Click);
-            // 
-            // DeletePart
-            // 
-            this.DeletePart.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.DeletePart.Location = new System.Drawing.Point(609, 242);
-            this.DeletePart.Name = "DeletePart";
-            this.DeletePart.Size = new System.Drawing.Size(161, 43);
-            this.DeletePart.TabIndex = 14;
-            this.DeletePart.Text = "Usun etap";
-            this.DeletePart.UseVisualStyleBackColor = true;
-            // 
-            // StagePicture
-            // 
-            this.StagePicture.Location = new System.Drawing.Point(403, 192);
-            this.StagePicture.Name = "StagePicture";
-            this.StagePicture.Size = new System.Drawing.Size(155, 152);
-            this.StagePicture.TabIndex = 17;
-            this.StagePicture.TabStop = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(190, -59);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 15);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "label3";
-            // 
-            // TitleLabel
-            // 
-            this.TitleLabel.Location = new System.Drawing.Point(12, 13);
-            this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(546, 44);
-            this.TitleLabel.TabIndex = 19;
-            this.TitleLabel.Text = "TitleLabel";
-            // 
-            // DescriptionLabel
-            // 
-            this.DescriptionLabel.Location = new System.Drawing.Point(12, 91);
-            this.DescriptionLabel.Name = "DescriptionLabel";
-            this.DescriptionLabel.Size = new System.Drawing.Size(546, 79);
-            this.DescriptionLabel.TabIndex = 20;
-            this.DescriptionLabel.Text = "DescriptionLabel";
-            // 
-            // PartTitleLabel
-            // 
-            this.PartTitleLabel.Location = new System.Drawing.Point(12, 192);
-            this.PartTitleLabel.Name = "PartTitleLabel";
-            this.PartTitleLabel.Size = new System.Drawing.Size(289, 50);
-            this.PartTitleLabel.TabIndex = 21;
-            this.PartTitleLabel.Text = "PartTitleLabel";
-            // 
-            // PartDescriptionLabel
-            // 
-            this.PartDescriptionLabel.Location = new System.Drawing.Point(12, 242);
-            this.PartDescriptionLabel.Name = "PartDescriptionLabel";
-            this.PartDescriptionLabel.Size = new System.Drawing.Size(364, 102);
-            this.PartDescriptionLabel.TabIndex = 22;
-            this.PartDescriptionLabel.Text = "PartDescriptionLabel";
-            // 
-            // DateLabel
-            // 
-            this.DateLabel.Location = new System.Drawing.Point(609, 13);
-            this.DateLabel.Name = "DateLabel";
-            this.DateLabel.Size = new System.Drawing.Size(161, 23);
-            this.DateLabel.TabIndex = 23;
-            this.DateLabel.Text = "Data";
+            this.DescriptionBox.Location = new System.Drawing.Point(12, 49);
+            this.DescriptionBox.Name = "DescriptionBox";
+            this.DescriptionBox.Size = new System.Drawing.Size(564, 145);
+            this.DescriptionBox.TabIndex = 21;
+            this.DescriptionBox.Text = "Description";
             // 
             // JourneyView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.DateLabel);
-            this.Controls.Add(this.PartDescriptionLabel);
-            this.Controls.Add(this.PartTitleLabel);
-            this.Controls.Add(this.DescriptionLabel);
-            this.Controls.Add(this.TitleLabel);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.StagePicture);
-            this.Controls.Add(this.DeletePart);
-            this.Controls.Add(this.ModifyJourney);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.AddNewPart);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(800, 700);
+            this.Controls.Add(this.DescriptionBox);
+            this.Controls.Add(this.TitleBox);
+            this.Controls.Add(this.DateBox);
             this.Name = "JourneyView";
             this.Text = "JourneyView";
-            ((System.ComponentModel.ISupportInitialize)(this.StagePicture)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button AddNewPart;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button ModifyJourney;
-        private System.Windows.Forms.Button DeletePart;
-        private System.Windows.Forms.PictureBox StagePicture;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label TitleLabel;
-        private System.Windows.Forms.Label DescriptionLabel;
-        private System.Windows.Forms.Label PartTitleLabel;
-        private System.Windows.Forms.Label PartDescriptionLabel;
-        private System.Windows.Forms.Label DateLabel;
+        private System.Windows.Forms.Label DateBox;
+        private System.Windows.Forms.Label TitleBox;
+        private System.Windows.Forms.Label DescriptionBox;
     }
 }

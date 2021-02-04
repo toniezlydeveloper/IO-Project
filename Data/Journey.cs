@@ -24,7 +24,7 @@ namespace IO_Project.JourneyInteraction
 
         public Stage StageByName(string name)
         {
-            return stages.First(stage => stage.Name == name);
+            return stages.FirstOrDefault(stage => stage.Name == name);
         }
 
         public void AddStage(Stage stage)
@@ -34,16 +34,26 @@ namespace IO_Project.JourneyInteraction
 
         public void AddStages(List<Stage> stages)
         {
-            stages.AddRange(stages);
+            this.stages.AddRange(stages);
         }
 
         public void AssignParticipant(Participant participant)
         {
-            participants.Add(participant);
+            this.participants.Add(participant);
         }
         public void AssignParticipants(List<Participant> participants)
         {
-            participants.AddRange(participants);
+            this.participants.AddRange(participants);
+        }
+
+        public List<Stage> getStages()
+        {
+            return this.stages;
+        }
+
+        public List<Participant> getParticipants()
+        {
+            return this.participants;
         }
     }
 }

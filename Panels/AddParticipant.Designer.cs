@@ -34,7 +34,6 @@ namespace IO_Project.Panels
             this.LastName = new System.Windows.Forms.RichTextBox();
             this.SetPicture = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.SaveAndQuit = new System.Windows.Forms.Button();
             this.Cancel = new System.Windows.Forms.Button();
             this.ListOfParticipants = new System.Windows.Forms.ListView();
             this.Imie = new System.Windows.Forms.ColumnHeader();
@@ -52,7 +51,6 @@ namespace IO_Project.Panels
             this.ParticipantsInfo.Size = new System.Drawing.Size(280, 61);
             this.ParticipantsInfo.TabIndex = 14;
             this.ParticipantsInfo.Text = "Ponizej wpisz imie i nazwisko uczestnika podrozy";
-            this.ParticipantsInfo.TextChanged += new System.EventHandler(this.ParticipantsInfo_TextChanged);
             // 
             // FirstName
             // 
@@ -80,7 +78,7 @@ namespace IO_Project.Panels
             // 
             this.SetPicture.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.SetPicture.Font = new System.Drawing.Font("Segoe UI", 11.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.SetPicture.Location = new System.Drawing.Point(69, 192);
+            this.SetPicture.Location = new System.Drawing.Point(12, 379);
             this.SetPicture.Name = "SetPicture";
             this.SetPicture.Size = new System.Drawing.Size(156, 59);
             this.SetPicture.TabIndex = 24;
@@ -99,18 +97,6 @@ namespace IO_Project.Panels
             this.label1.Text = "---------------------------------------------------------------------------------" +
     "--------------------------------------------------------------------------------" +
     "---------------------";
-            // 
-            // SaveAndQuit
-            // 
-            this.SaveAndQuit.BackColor = System.Drawing.Color.SpringGreen;
-            this.SaveAndQuit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.SaveAndQuit.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.SaveAndQuit.Location = new System.Drawing.Point(12, 372);
-            this.SaveAndQuit.Name = "SaveAndQuit";
-            this.SaveAndQuit.Size = new System.Drawing.Size(155, 66);
-            this.SaveAndQuit.TabIndex = 26;
-            this.SaveAndQuit.Text = "Zapisz i wyjdz";
-            this.SaveAndQuit.UseVisualStyleBackColor = false;
             // 
             // Cancel
             // 
@@ -169,7 +155,6 @@ namespace IO_Project.Panels
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.ListOfParticipants);
             this.Controls.Add(this.Cancel);
-            this.Controls.Add(this.SaveAndQuit);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SetPicture);
             this.Controls.Add(this.LastName);
@@ -189,7 +174,6 @@ namespace IO_Project.Panels
         private System.Windows.Forms.RichTextBox LastName;
         private System.Windows.Forms.Button SetPicture;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button SaveAndQuit;
         private System.Windows.Forms.Button Cancel;
         private System.Windows.Forms.ListView ListOfParticipants;
         private System.Windows.Forms.RichTextBox richTextBox1;

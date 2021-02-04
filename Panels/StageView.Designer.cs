@@ -31,9 +31,11 @@ namespace IO_Project.Panels
         {
             this.ModifyStage = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.JourneyNameLabel = new System.Windows.Forms.Label();
             this.PartTitleLabel = new System.Windows.Forms.Label();
             this.PartDescriptionLabel = new System.Windows.Forms.Label();
+            this.PictureBox = new System.Windows.Forms.PictureBox();
+            this.JourneyTitleLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // ModifyStage
@@ -59,42 +61,52 @@ namespace IO_Project.Panels
     "--------------------------------------------------------------------------------" +
     "---------------------";
             // 
-            // JourneyNameLabel
-            // 
-            this.JourneyNameLabel.Location = new System.Drawing.Point(25, 16);
-            this.JourneyNameLabel.Name = "JourneyNameLabel";
-            this.JourneyNameLabel.Size = new System.Drawing.Size(745, 34);
-            this.JourneyNameLabel.TabIndex = 27;
-            this.JourneyNameLabel.Text = "Tytul podrozy";
-            // 
             // PartTitleLabel
             // 
-            this.PartTitleLabel.Location = new System.Drawing.Point(331, 50);
+            this.PartTitleLabel.Location = new System.Drawing.Point(25, 61);
             this.PartTitleLabel.Name = "PartTitleLabel";
-            this.PartTitleLabel.Size = new System.Drawing.Size(161, 32);
+            this.PartTitleLabel.Size = new System.Drawing.Size(467, 39);
             this.PartTitleLabel.TabIndex = 28;
             this.PartTitleLabel.Text = "Tytul etapu";
             // 
             // PartDescriptionLabel
             // 
-            this.PartDescriptionLabel.Location = new System.Drawing.Point(25, 86);
+            this.PartDescriptionLabel.Location = new System.Drawing.Point(25, 109);
             this.PartDescriptionLabel.Name = "PartDescriptionLabel";
-            this.PartDescriptionLabel.Size = new System.Drawing.Size(745, 190);
+            this.PartDescriptionLabel.Size = new System.Drawing.Size(467, 167);
             this.PartDescriptionLabel.TabIndex = 29;
             this.PartDescriptionLabel.Text = "Opis etapu";
+            // 
+            // PictureBox
+            // 
+            this.PictureBox.Location = new System.Drawing.Point(498, 9);
+            this.PictureBox.Name = "PictureBox";
+            this.PictureBox.Size = new System.Drawing.Size(290, 267);
+            this.PictureBox.TabIndex = 30;
+            this.PictureBox.TabStop = false;
+            // 
+            // JourneyTitleLabel
+            // 
+            this.JourneyTitleLabel.Location = new System.Drawing.Point(25, 9);
+            this.JourneyTitleLabel.Name = "JourneyTitleLabel";
+            this.JourneyTitleLabel.Size = new System.Drawing.Size(467, 43);
+            this.JourneyTitleLabel.TabIndex = 28;
+            this.JourneyTitleLabel.Text = "Tytul podrozy";
             // 
             // StageView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.JourneyTitleLabel);
+            this.Controls.Add(this.PictureBox);
             this.Controls.Add(this.PartDescriptionLabel);
             this.Controls.Add(this.PartTitleLabel);
-            this.Controls.Add(this.JourneyNameLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ModifyStage);
             this.Name = "StageView";
             this.Text = "StageView";
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,8 +115,9 @@ namespace IO_Project.Panels
         #endregion
         private System.Windows.Forms.Button ModifyStage;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label JourneyNameLabel;
         private System.Windows.Forms.Label PartTitleLabel;
         private System.Windows.Forms.Label PartDescriptionLabel;
+        private System.Windows.Forms.PictureBox PictureBox;
+        private System.Windows.Forms.Label JourneyTitleLabel;
     }
 }
