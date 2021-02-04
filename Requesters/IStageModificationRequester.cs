@@ -2,7 +2,7 @@
 
 namespace IO_Project.StageInteraction
 {
-    interface IStageModificationRequester
+    public interface IStageModificationRequester
     {
         void ModifyStage(Action modificationCallback, Action modificationFailCallback);
     }

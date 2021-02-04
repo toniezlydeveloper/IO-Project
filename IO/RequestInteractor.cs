@@ -10,7 +10,7 @@ namespace IO_Project.JourneyInteraction.Entities
         protected Action operationCallback;
         protected Action operationFailCallback;
 
-        public bool IsBusy { get; private set; }
+        public bool IsBusy { get; set; }
 
         public RequestInteractor(IRequestProcesssor requestSender)
         {

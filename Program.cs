@@ -10,6 +10,7 @@ using IO_Project.IO;
 using IO_Project.IO.Entities;
 using IO_Project.JourneyInteraction;
 using IO_Project.JourneyInteraction.Entities;
+using IO_Project.Panels;
 using IO_Project.ParticipantInteraction;
 using IO_Project.ParticipantInteraction.Entities;
 using IO_Project.StageInteraction;
@@ -20,12 +21,21 @@ namespace IO_Project
     static class Program
     {
         private static SqlConnection connection;
-        private static Journal journal;
-        private static RequestInteractor requestInteractor;
+        public static Journal journal;
+        public static RequestInteractor requestInteractor;
         private static StageInteractor stageInteractor;
-        private static JourneyInteractor journeyInteractor;
+        public static JourneyInteractor journeyInteractor;
         private static ParticipantInteractor participantInteractor;
         private static DataSynchronizer dataSynchronizer;
+        public static AddNewPart addStageView;
+        public static AddParticipant addParticipantView;
+        public static ModifyJourney modifyJourneyView;
+        public static JourneyView journeyView;
+        public static JournalView journalView;
+        public static AddJourney addJourneyView;
+        public static StageView stageView;
+        public static ModifyPart modifyStage;
+        private static CreateJourneyConfigurationProvider createJourneyConfigurationProvider;
 
         [STAThread]
         static void Main()
@@ -33,8 +43,8 @@ namespace IO_Project
             Initialize();
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            //   Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(journalView);
         }
 
         private static void Initialize()
@@ -64,8 +74,15 @@ namespace IO_Project
         }
 
         private static void CreateViews()
-        {
-            throw new NotImplementedException();
+        { 
+            addStageView = new AddNewPart(stageInteractor);
+            journeyView = new JourneyView(journeyInteractor, stageInteractor);
+            addParticipantView = new AddParticipant(participantInteractor, participantInteractor);
+            modifyJourneyView = new ModifyJourney(journeyInteractor);
+            addJourneyView = new AddJourney(journeyInteractor);
+            journalView = new JournalView(journal);
+            stageView = new StageView(stageInteractor);
+            modifyStage = new ModifyPart(stageInteractor);
         }
 
         private static void CreateQueryExecutors()
@@ -90,12 +107,12 @@ namespace IO_Project
 
         private static void CreateRequestConfigurationProviders()
         {
-            RegisterRequestConfigurationProvider(new AssignParticipantConfigurationProvider(null, null));
-            RegisterRequestConfigurationProvider(new AssignStageConfigurationProvider(null, null));
-            RegisterRequestConfigurationProvider(new CreateJourneyConfigurationProvider(null));
-            RegisterRequestConfigurationProvider(new CreateParticipantConfigurationProvider(null));
-            RegisterRequestConfigurationProvider(new ModifyJourneyConfigurationProvider(null, null));
-            RegisterRequestConfigurationProvider(new ModifyStageConfigurationProvider(null, null, null));
+            RegisterRequestConfigurationProvider(new AssignParticipantConfigurationProvider(journeyView, addParticipantView));
+            RegisterRequestConfigurationProvider(new AssignStageConfigurationProvider(addStageView, journeyView));
+            RegisterRequestConfigurationProvider(new CreateJourneyConfigurationProvider(addJourneyView));
+            RegisterRequestConfigurationProvider(new CreateParticipantConfigurationProvider(addParticipantView));
+            RegisterRequestConfigurationProvider(new ModifyJourneyConfigurationProvider(journeyView, modifyJourneyView));
+            RegisterRequestConfigurationProvider(new ModifyStageConfigurationProvider(modifyStage, stageView, journeyView));
         }
 
         private static void RegisterQueryExecutor(IQueryExecutor queryExecutor)
@@ -108,7 +125,7 @@ namespace IO_Project
             JournalModifiersFactory.RegisterJournalModifier(journalModifier);
         }
 
-        private static void RegisterRequestConfigurationProvider(IRequestConfigurationProvider configurationProvider)
+        public static void RegisterRequestConfigurationProvider(IRequestConfigurationProvider configurationProvider)
         {
             RequestConfigurationProvidersFactory.RegisterConfigurationProvider(configurationProvider);
         }
