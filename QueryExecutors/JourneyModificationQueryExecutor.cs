@@ -26,8 +26,7 @@ namespace IO_Project.IO.Entities
         private void updateJourneyToDatabase(string oldName, string newName, string description, string date)
         {
 
-            using (connection)
-            {
+            
                 connection.Open();
                 SqlCommand command = new SqlCommand(null, connection);
 
@@ -54,7 +53,7 @@ namespace IO_Project.IO.Entities
                 command.ExecuteNonQuery();
                 connection.Close();
 
-            }
+            
         }
     }
 }
