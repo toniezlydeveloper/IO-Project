@@ -9,6 +9,8 @@ namespace IO_Project.Panels
         AssignStage,
         AssignParticipant,
         ModifyJourney,
-        CreateJourney
+        CreateJourney,
+        ModifyStage,
+        CreateParticipant
     }
 }

@@ -37,7 +37,12 @@ namespace IO_Project.Panels
 
         private void ModifyStage_Click(object sender, EventArgs e)
         {
-            assignRequester.AssignStage(ChangePanel, InformAboutFail);
+            // assignRequester.AssignStage(ChangePanel, InformAboutFail);
+            // Program.requestInteractor.IsBusy = false;
+            OnToggleRequired?.Invoke(0);
+            this.Hide();
+            Program.modifyStage.PresentStage(this.stage, this.journey);
+            Program.modifyStage.Show();
         }
 
        
@@ -60,7 +65,7 @@ namespace IO_Project.Panels
             PartTitleLabel.Text = stage.Name;
             PartDescriptionLabel.Text = stage.Description;
             PictureBox.ImageLocation = stage.IconPath;
-            PictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
+        //    PictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
             JourneyTitleLabel.Text = journey.Name;
             this.stage = stage;
             this.journey = journey;

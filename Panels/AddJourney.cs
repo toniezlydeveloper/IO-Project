@@ -35,7 +35,7 @@ namespace IO_Project.Panels
         private void SaveAndQuit_Click(object sender, EventArgs e)
         {
             creationRequester.CreateJourney(ChangePanel, InformAboutFail);
-
+            Program.requestInteractor.IsBusy = false;
         }
 
        

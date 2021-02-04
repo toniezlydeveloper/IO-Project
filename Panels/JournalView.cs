@@ -158,6 +158,7 @@ namespace IO_Project
             string name = button.AccessibleName;
 
             this.Hide();
+            this.deleteControls();
 
             Journey journey = this.journal.JourneyByName(name);
             Program.journeyView.PresentJourney(journey);

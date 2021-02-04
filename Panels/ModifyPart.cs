@@ -34,6 +34,7 @@ namespace IO_Project.Panels
         private void SaveAndQuit_Click(object sender, EventArgs e)
         {
             modificationRequester.ModifyStage(ChangePanel, InformAboutFail);
+            Program.requestInteractor.IsBusy = false;
         }
 
         private void SetPicture_Click(object sender, EventArgs e)
@@ -60,7 +61,7 @@ namespace IO_Project.Panels
 
         private void InformAboutFail()
         {
-            MessageBox.Show("Couldn't assign stage.");
+            MessageBox.Show("Couldn't modify stage.");
         }
 
         public void PresentStage(Stage stage, Journey journey)

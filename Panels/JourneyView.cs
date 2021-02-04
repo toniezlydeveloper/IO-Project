@@ -32,10 +32,10 @@ namespace IO_Project.Panels
 
         private void ModifyJourney_Click(object sender, EventArgs e)
         {
-
+            
             OnToggleRequired?.Invoke(0);
             this.Hide();
-
+            this.deleteControls();
 
             Journey journey = this.journey;
             Program.modifyJourneyView.PresentJourney(journey);
@@ -50,8 +50,7 @@ namespace IO_Project.Panels
             this.Hide();
 
 
-            Journey journey = this.journey;
-            ModifyJourney modifyView = new ModifyJourney(Program.journeyInteractor);
+            Program.stageView.Show();
         }
 
         private void InformAboutFail()
@@ -209,12 +208,15 @@ namespace IO_Project.Panels
         {
             Button button = (Button)sender;
             string name = button.AccessibleName;
-
             this.Hide();
+            
 
             Stage stage = this.journey.StageByName(name);
             Program.stageView.PresentStage(stage, this.journey);
             Program.stageView.Show();
+       //     this.stageAssignRequester.AssignStage(ChangePanel, InformAboutFail);
+        //    Program.requestInteractor.IsBusy = false;
+
         }
 
         private void NextButton_Click(object sender, EventArgs e)

@@ -33,6 +33,7 @@ namespace IO_Project.Panels
         private void SaveAndQuit_Click(object sender, EventArgs e)
         {
             assignRequester.AssignStage(ChangePanel, InformAboutFail);
+            Program.requestInteractor.IsBusy = false;
         }
 
         private void SetPicture_Click(object sender, EventArgs e)
